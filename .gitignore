@@ -7,3 +7,4 @@ themes/classic/views/
 vendor/*
 .buildpath
 .project
+.bowerrc
