@@ -43,7 +43,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 	}
 	public static function findIdentityByAccessToken($token, $type = null)
 	{
-		return static::findOne(['accessToken' => $token]);
+		return static::findOne(['authKey' => $token]);
 	}
 	public static function findByUsername ($us)
 	{

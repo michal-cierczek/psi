@@ -80,7 +80,7 @@ public function validatePassword($attribute, $params)
     public function getUser()
     {
         if ($this->_user === false) {
-            $this->_user = Users::findByUsername($this->username);
+            $this->_user = User::findByUsername($this->username);
         }
 
         return $this->_user;
