@@ -2,8 +2,8 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=mysql.cba.pl;dbname=projektnapsi_cba_pl',
-    'username' => 'adminbazki',
+    'dsn' => 'mysql:host=marysienka.pl;dbname=cierczek_psi',
+    'username' => 'cierczek_psi',
     'password' => 'zaq12wsx',
     'charset' => 'utf8',
 	'attributes' => [
