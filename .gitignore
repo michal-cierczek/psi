@@ -9,3 +9,4 @@ vendor/*
 .project
 .bowerrc
 composer.lock
+.settings/*
