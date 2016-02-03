@@ -64,8 +64,7 @@ public function validatePassword($attribute, $params)
      */
     public function login()
     {
-    	Yii::trace(Yii::$app->security->generatePasswordHash('admin'));
-        if ($this->validate()) {
+    	if ($this->validate()) {
             return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600*24*30 : 0);
         } else {
             return false;

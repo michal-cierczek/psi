@@ -12,6 +12,8 @@ use yii\web\IdentityInterface;
 
 class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
+	const TYPE_ADMIN = 1;
+	const TYPE_USER = 2;
 	/**
 	 * @inheritdoc
 	 */
@@ -73,5 +75,19 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 	public function generateAuthKey ()
 	{
 		$this->authKey=Yii::$app->getSecurity()->generateRandomString();
+		$this->save();
+	}
+	public function resetAuthKey(){
+		$this->authKey = null;
+		$this->save();
+	}
+	public function beforeSave($insert)
+	{
+		if (parent::beforeSave($insert)) {
+			if($insert) $this->groupId=self::TYPE_USER;
+			return true;
+		} else {
+			return false;
+		}
 	}
 }
