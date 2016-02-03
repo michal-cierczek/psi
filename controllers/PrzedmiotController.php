@@ -81,8 +81,20 @@ class PrzedmiotController extends Controller
      * @param integer $user_id
      * @return mixed
      */
-    public function actionUpdate($id, $kierunekStudiow_id, $user_id)
+    public function actionUpdate($id, $step)
     {
+    	$model = null;
+    	switch($step){
+    		case 'one':
+    			if(!($model = Przedmiot::find()->where(['id' => $id, 'user_id' => Yii::$app->user->id])->one()))
+    				$model = new Przedmiot();
+    			break;
+    		case 'two':
+    	}
+    	
+    	if(!is_null($model)){
+    		return $this->render($step, ['model' => $model]);
+    	}
         $model = $this->findModel($id, $kierunekStudiow_id, $user_id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
