@@ -32,12 +32,12 @@ class KekController extends Controller
      */
     public function actionIndex($kid = null)
     {
-    	if(is_null($kid))
-    	{
-    		return $this->render('kierunki');
-    	}
-    	else
-    	{
+//     	if(is_null($kid))
+//     	{
+//     		return $this->render('kierunki');
+//     	}
+//     	else
+//     	{
         $searchModel = new KekSearch();
         Yii::trace(Yii::$app->request->getQueryParams());
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -46,7 +46,7 @@ class KekController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
-    		}
+//     		}
     }
 
     /**
