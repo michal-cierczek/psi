@@ -81,29 +81,26 @@ class PrzedmiotController extends Controller
      * @param integer $user_id
      * @return mixed
      */
-    public function actionUpdate($id, $step)
+    public function actionUpdate($step, $id=null)
     {
-    	$model = null;
     	switch($step){
-    		case 'one':
+    		case '1':
     			if(!($model = Przedmiot::find()->where(['id' => $id, 'user_id' => Yii::$app->user->id])->one()))
     				$model = new Przedmiot();
     			break;
-    		case 'two':
+    		case '2':
+    			if(!($model = Kurs::find()->where(['id' => $id, 'user_id' => Yii::$app->user->id])->one()))
+    				$model = new Kurs();
+    				break;
     	}
     	
-    	if(!is_null($model)){
-    		return $this->render($step, ['model' => $model]);
+    	if ($model->load(Yii::$app->request->post()) && $model->save()) {
+    		$step++;
+    		return $this->redirect(['update', 'id' => $id, 'step'=>$step]);
     	}
-        $model = $this->findModel($id, $kierunekStudiow_id, $user_id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id, 'kierunekStudiow_id' => $model->kierunekStudiow_id, 'user_id' => $model->user_id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
-        }
+    	Yii::trace($model);
+    	Yii::trace($model->nazwaKierunku);
+    	return $this->render('update', ['model' => $model, 'step' => $step]);      
     }
 
     /**

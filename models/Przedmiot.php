@@ -26,6 +26,8 @@ use Yii;
  */
 class Przedmiot extends \yii\db\ActiveRecord
 {
+	
+	public $nazwa;
     /**
      * @inheritdoc
      */
@@ -119,5 +121,17 @@ class Przedmiot extends \yii\db\ActiveRecord
     public function getKeks()
     {
         return $this->hasMany(Kek::className(), ['id' => 'kek_id'])->viaTable('przedmiotKek', ['przedmiot_id' => 'id']);
+    }
+    
+    public function getNazwaKierunku(){
+    	return $this->kierunekStudiow->opis;
+    }
+    
+    public function getSpecjalnosc(){
+    	return $this->hasOne(Specjalnosc::className(), ['id' => 'specjalnosc_id']);
+    }
+    
+    public function getNazwaSpec(){
+    	return $this->specjalnosc->nazwa;
     }
 }
