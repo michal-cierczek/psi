@@ -30,8 +30,7 @@ class Literatura extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['opis'], 'string'],
-            [['czyPodstawowa', 'przedmiot_id'], 'integer'],
+            [['podstawowa', 'uzupelniajaca'], 'string'],
             [['przedmiot_id'], 'required']
         ];
     }
@@ -43,8 +42,8 @@ class Literatura extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'opis' => 'Opis',
-            'czyPodstawowa' => 'Czy Podstawowa',
+            'podstawowa' => 'Literatura podstawowa',
+            'uzupelniajaca' => 'Literatura uzupelniajaca',
             'przedmiot_id' => 'Przedmiot ID',
         ];
     }

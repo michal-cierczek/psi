@@ -8,6 +8,7 @@ use app\models\PrzedmiotSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\Literatura;
 
 /**
  * PrzedmiotController implements the CRUD actions for Przedmiot model.
@@ -90,18 +91,20 @@ class PrzedmiotController extends Controller
     			break;
     		case '2':
     			break;
-    		case '3':
+    		case '3': // wymagania
     			if(!($model = Przedmiot::find() -> where(['id' => $id]) -> one()))
     				$model = new Przedmiot();
-    			break;	
+    			break;
+    		case '9': // literatura
+    			if(!($model = Literatura::find() -> where(['przedmiot_id' => $id]) -> one()))
+    				$model = new Literatura();
+    			break;
     	}
     	
     	if ($model->load(Yii::$app->request->post()) && $model->save()) {
     		$step++;
     		return $this->redirect(['update', 'id' => $id, 'step'=>$step]);
     	}
-    	Yii::trace($model);
-    	Yii::trace($model->nazwaKierunku);
     	return $this->render('update', ['model' => $model, 'step' => $step]);      
     }
 
