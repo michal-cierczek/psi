@@ -10,3 +10,4 @@ vendor/*
 .bowerrc
 composer.lock
 .settings/*
+/composer.phar
