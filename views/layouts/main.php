@@ -46,6 +46,13 @@ AppAsset::register($this);
                     'url' => ['/user/logout'],
                     'linkOptions' => ['data-method' => 'post']
                 ],
+        		
+        	Yii::$app->user->isGuest ?
+        		['label' => 'Rejestracja', 'url' => ['/user/register']] :
+        		[
+        				'label' => ''
+        		],
+        		
         ],
     ]);
     NavBar::end();
