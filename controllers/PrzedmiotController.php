@@ -89,9 +89,11 @@ class PrzedmiotController extends Controller
     				$model = new Przedmiot();
     			break;
     		case '2':
-    			if(!($model = Kurs::find()->where(['id' => $id, 'user_id' => Yii::$app->user->id])->one()))
-    				$model = new Kurs();
-    				break;
+    			break;
+    		case '3':
+    			if(!($model = Przedmiot::find() -> where(['id' => $id]) -> one()))
+    				$model = new Przedmiot();
+    			break;	
     	}
     	
     	if ($model->load(Yii::$app->request->post()) && $model->save()) {

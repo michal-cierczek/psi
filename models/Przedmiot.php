@@ -44,7 +44,7 @@ class Przedmiot extends \yii\db\ActiveRecord
         return [
             [['kodKursu', 'wymaganie', 'nazwaPolska', 'nazwaAngielska', 'kierunekStudiow_id', 'published', 'user_id'], 'required'],
             [['kierunekStudiow_id', 'published', 'user_id'], 'integer'],
-            [['kodKursu', 'wymaganie'], 'string', 'max' => 45],
+            [['kodKursu', 'wymaganie'], 'string'],
             [['nazwaPolska', 'nazwaAngielska'], 'string', 'max' => 100],
             [['kodKursu'], 'unique']
         ];

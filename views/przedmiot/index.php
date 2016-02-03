@@ -14,7 +14,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
+	
+	
     <p>
         <?= Html::a('Create Przedmiot', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
@@ -24,16 +25,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
+            //'id',
             'kodKursu',
-            'wymaganie',
+            //'wymaganie',
             'nazwaPolska',
             'nazwaAngielska',
             // 'kierunekStudiow_id',
             // 'published',
             // 'user_id',
-
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
