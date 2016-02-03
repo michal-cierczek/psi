@@ -41,7 +41,7 @@ class KekSearch extends Kek
      */
     public function search($params)
     {
-        $query = Kek::find()->where(['']);
+        $query = Kek::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
