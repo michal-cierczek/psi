@@ -40,7 +40,8 @@ class Kurs extends \yii\db\ActiveRecord
             [['CMPS', 'ZZU', 'bKECTS', 'pECTS', 'ECTS', 'przedmiot_id'], 'integer'],
             [['formaProwadzeniaZajec'], 'string', 'max' => 45],
             [['formaZaliczenia'], 'string'],
-        	[['czyKonczacy'], 'boolean']
+        	[['czyKonczacy'], 'boolean'],
+        	[['przedmiot_id'], 'safe']
         ];
     }
 

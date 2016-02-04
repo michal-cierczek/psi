@@ -27,6 +27,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'ECTS')->textInput() ?>
 
     <?= $form->field($model, 'czyKonczacy')->checkbox() ?>
+    
+    <?= $form->field($model, 'przedmiot_id')->hiddenInput(['value' => $_GET['id']])->label(false) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
