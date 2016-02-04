@@ -28,7 +28,7 @@ use yii\helpers\Url;
 						'del' => function($url, $model, $key){
         						$icon = '<span class="glyphicon glyphicon-trash"></span>';
         						$label = 'Usun';
-        						$url = Url::to(["/cel-kp/delete", 'id' =>$model -> id, 'kid' => $_GET['id']]);
+        						$url = Url::to(["/cel-kp/delete", 'id' =>$model -> id, 'kid' => $model->przedmiot_id]);
 								return Html::a($icon, $url, ['title' => $label]);
 								}
 						                		

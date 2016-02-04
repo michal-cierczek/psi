@@ -117,11 +117,11 @@ class PrzedmiotController extends Controller
     		$step++;
     		return $this->redirect(['update', 'id' => $id, 'step'=>$step]);
     	}else{
-    		if($forModal->load(Yii::$app->request->post()) && $forModal->save()){
+    		if($step==4 && $forModal->load(Yii::$app->request->post()) && $forModal->save()){
     			$forModal = new CelKP();
     		}
     	}
-    	return $this->render('update', ['model' => $model, 'step' => $step, 'forModal' => $forModal]);      
+    	return $this->render('update', ['model' => $model, 'id' => $id, 'step' => $step, 'forModal' => $forModal]);      
     }
 
     /**
