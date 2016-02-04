@@ -58,7 +58,7 @@ class Przedmiot extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'kodKursu' => 'Kod Kursu',
-            'wymaganie' => 'Wymaganie',
+            'wymaganie' => 'Wymagania wstępne w zakresie wiedzy, umiejętności i innych kompetencji',
             'nazwaPolska' => 'Nazwa Polska',
             'nazwaAngielska' => 'Nazwa Angielska',
             'kierunekStudiow_id' => 'Kierunek Studiow ID',
