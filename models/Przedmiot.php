@@ -58,7 +58,7 @@ class Przedmiot extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'kodKursu' => 'Kod Kursu',
-            'wymaganie' => 'Wymaganie',
+            'wymaganie' => 'Wymagania wstępne w zakresie wiedzy, umiejętności i innych kompetencji',
             'nazwaPolska' => 'Nazwa Polska',
             'nazwaAngielska' => 'Nazwa Angielska',
             'kierunekStudiow_id' => 'Kierunek Studiow ID',
@@ -133,5 +133,17 @@ class Przedmiot extends \yii\db\ActiveRecord
     
     public function getNazwaSpec(){
     	return $this->specjalnosc->nazwa;
+    }
+    public function getAutorName()
+    {
+    	return $this->user->name;
+    }
+    public function getAutorSurname()
+    {
+    	return $this->user->surname;
+    }
+    public function getAutorEmail()
+    {
+    	return $this->user->email;
     }
 }
