@@ -36,10 +36,11 @@ class Kurs extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['formaProwadzeniaZajec', 'CMPS', 'ZZU', 'formaZaliczenia', 'bKECTS', 'pECTS', 'ECTS', 'grupaKursow', 'przedmiot_id'], 'required'],
-            [['CMPS', 'ZZU', 'bKECTS', 'pECTS', 'ECTS', 'grupaKursow', 'przedmiot_id'], 'integer'],
+            [['formaProwadzeniaZajec', 'CMPS', 'ZZU', 'formaZaliczenia', 'bKECTS', 'pECTS', 'ECTS', 'czyKonczacy', 'przedmiot_id'], 'required'],
+            [['CMPS', 'ZZU', 'bKECTS', 'pECTS', 'ECTS', 'przedmiot_id'], 'integer'],
             [['formaProwadzeniaZajec'], 'string', 'max' => 45],
-            [['formaZaliczenia'], 'string', 'max' => 5]
+            [['formaZaliczenia'], 'string'],
+        	[['czyKonczacy'], 'boolean']
         ];
     }
 
@@ -50,14 +51,14 @@ class Kurs extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'formaProwadzeniaZajec' => 'Forma Prowadzenia Zajec',
-            'CMPS' => 'Cmps',
-            'ZZU' => 'Zzu',
+            'formaProwadzeniaZajec' => 'Forma Prowadzenia Zajęć',
+            'CMPS' => 'Całkowity Nakład Pracy Studenta (CNPS) [h]',
+            'ZZU' => 'Liczba godzin zajęć zorganizowanych w uczelni',
             'formaZaliczenia' => 'Forma Zaliczenia',
-            'bKECTS' => 'B Kects',
-            'pECTS' => 'P Ects',
-            'ECTS' => 'Ects',
-            'grupaKursow' => 'Grupa Kursow',
+            'bKECTS' => 'Liczba punktów ECTS odpowiadająca zajęciom wymagającym bezpośredniego kontaktu (BK)',
+            'pECTS' => 'Punkty ECTS odpowiadające zajęciom o charakterze praktycznym (P)',
+            'ECTS' => 'Liczba punktów ECTS',
+            'czyKonczacy' => 'Kurs kończący dla grupy kursów',
             'przedmiot_id' => 'Przedmiot ID',
         ];
     }

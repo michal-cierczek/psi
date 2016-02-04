@@ -62,8 +62,9 @@ class Przedmiot extends \yii\db\ActiveRecord
             'nazwaPolska' => 'Nazwa Polska',
             'nazwaAngielska' => 'Nazwa Angielska',
             'kierunekStudiow_id' => 'Kierunek Studiow ID',
-            'published' => 'Published',
+            'published' => 'Opublikownany',
             'user_id' => 'User ID',
+        	'grupaKursow' => 'Grupa kursów'
         ];
     }
 

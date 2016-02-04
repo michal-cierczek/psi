@@ -12,13 +12,13 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'formaProwadzeniaZajec')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'formaProwadzeniaZajec')->dropDownList(['Wykład', 'Ćwieczenia', 'Laboratorium', 'Projekt', 'Seminarium']) ?>
 
     <?= $form->field($model, 'CMPS')->textInput() ?>
 
     <?= $form->field($model, 'ZZU')->textInput() ?>
 
-    <?= $form->field($model, 'formaZaliczenia')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'formaZaliczenia')->dropDownList(['Egzamin', 'Zaliczenie']) ?>
 
     <?= $form->field($model, 'bKECTS')->textInput() ?>
 
@@ -26,7 +26,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'ECTS')->textInput() ?>
 
-    <?= $form->field($model, 'przedmiot_id')->textInput() ?>
+    <?= $form->field($model, 'czyKonczacy')->checkbox() ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

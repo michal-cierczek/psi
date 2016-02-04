@@ -19,23 +19,23 @@ use yii\helpers\Url;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'formaProwadzeniaZajec',
-            'CMPS',
-            'ZZU',
-            'formaZaliczenia',
-        	'ECTS',
-            'bKECTS',
-            'pECTS',
-            'czyKonczacy',
+        	'formaZaliczenia',
+            ['attribute' => 'CMPS', 'label'=>'CNPS'],
+            ['attribute' => 'ZZU', 'label'=>'ZZU'],
+        	['attribute' => 'ECTS', 'label'=>'ECTS'],
+            ['attribute' => 'bKECTS', 'label'=>'BK-ECTS'],
+            ['attribute' => 'pECTS', 'label'=>'P-ECTS'],
+            ['attribute' => 'czyKonczacy', 'format'=>'checkBox', 'label'=>'Czy Kończacy'],
             [
             	'class' => 'yii\grid\ActionColumn',
-            	'controller' => 'cel-kp',
+            	'controller' => 'kurs',
             	'template' => '{update} {del}',
                 'buttons' => 
             		[
 						'del' => function($url, $model, $key){
         						$icon = '<span class="glyphicon glyphicon-trash"></span>';
         						$label = 'Usun';
-        						$url = Url::to(["/cel-kp/delete", 'id' =>$model -> id, 'kid' => $model->przedmiot_id]);
+        						$url = Url::to(["/kurs/delete", 'id' =>$model -> id, 'kid' => $model->przedmiot_id]);
 								return Html::a($icon, $url, ['title' => $label]);
 								}
 						                		
