@@ -134,4 +134,16 @@ class Przedmiot extends \yii\db\ActiveRecord
     public function getNazwaSpec(){
     	return $this->specjalnosc->nazwa;
     }
+    public function getAutorName()
+    {
+    	return $this->user->name;
+    }
+    public function getAutorSurname()
+    {
+    	return $this->user->surname;
+    }
+    public function getAutorEmail()
+    {
+    	return $this->user->email;
+    }
 }

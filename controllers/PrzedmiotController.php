@@ -99,6 +99,10 @@ class PrzedmiotController extends Controller
     			if(!($model = Literatura::find() -> where(['przedmiot_id' => $id]) -> one()))
     				$model = new Literatura();
     			break;
+    		case '10': // opiekun
+    			if(!($model = Przedmiot::find() -> where(['id' => $id]) -> one()))
+    				$model = new Przedmiot();
+    			break;
     	}
     	
     	if ($model->load(Yii::$app->request->post()) && $model->save()) {
