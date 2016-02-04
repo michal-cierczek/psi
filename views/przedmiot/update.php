@@ -11,7 +11,6 @@ $this->title = 'Edycja karty przedmiotu. Krok: ' . ' ' . $step;
 $this->params['breadcrumbs'][] = ['label' => 'Przedmiots', 'url' => ['index']];
 //$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id, 'kierunekStudiow_id' => $model->kierunekStudiow_id, 'user_id' => $model->user_id]];
 $this->params['breadcrumbs'][] = 'Update';
-$id = $model->id;
 ?>
 <div class="col-sm-3">
 <?= SideNav::widget([
@@ -41,6 +40,7 @@ $id = $model->id;
     <?= $this->render('kroki/' . $step, [
         'model' => $model,
     	'forModal' => $forModal,
+    	'id' => $id
     ]) ?>
 </div>
 </div>
