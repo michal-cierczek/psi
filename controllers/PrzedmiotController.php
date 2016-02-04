@@ -9,6 +9,8 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\models\Literatura;
+use app\models\CelKPSearch;
+use app\models\CelKP;
 
 /**
  * PrzedmiotController implements the CRUD actions for Przedmiot model.
@@ -84,6 +86,7 @@ class PrzedmiotController extends Controller
      */
     public function actionUpdate($step, $id=null)
     {
+    	$forModal = null;
     	switch($step){
     		case '1':
     			if(!($model = Przedmiot::find()->where(['id' => $id, 'user_id' => Yii::$app->user->id])->one()))
@@ -95,6 +98,11 @@ class PrzedmiotController extends Controller
     			if(!($model = Przedmiot::find() -> where(['id' => $id]) -> one()))
     				$model = new Przedmiot();
     			break;
+    		case '4': // celKP
+    			$forModal = new CelKP();
+    			$searchModel = new CelKPSearch();
+        		$model = $searchModel->search(['przedmiot_id'=> $id]);
+    			break;
     		case '9': // literatura
     			if(!($model = Literatura::find() -> where(['przedmiot_id' => $id]) -> one()))
     				$model = new Literatura();
@@ -105,11 +113,15 @@ class PrzedmiotController extends Controller
     			break;
     	}
     	
-    	if ($model->load(Yii::$app->request->post()) && $model->save()) {
+    	if ($step != 4 && $model->load(Yii::$app->request->post()) && $model->save()) {
     		$step++;
     		return $this->redirect(['update', 'id' => $id, 'step'=>$step]);
+    	}else{
+    		if($forModal->load(Yii::$app->request->post()) && $forModal->save()){
+    			$forModal = new CelKP();
+    		}
     	}
-    	return $this->render('update', ['model' => $model, 'step' => $step]);      
+    	return $this->render('update', ['model' => $model, 'step' => $step, 'forModal' => $forModal]);      
     }
 
     /**

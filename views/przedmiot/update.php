@@ -40,6 +40,7 @@ $id = $model->id;
 
     <?= $this->render('kroki/' . $step, [
         'model' => $model,
+    	'forModal' => $forModal,
     ]) ?>
 </div>
 </div>
