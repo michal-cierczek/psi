@@ -36,7 +36,7 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-        		['label' => 'Home', 'url' => ['/site/index']],
+        		['label' => 'Strona główna', 'url' => ['/site/index']],
         		Yii::$app->user->isGuest ?
         			['label' => 'Przeglądaj kartę przedmiotu', 'url' => ['/site/index']] :
         			[
@@ -49,8 +49,8 @@ AppAsset::register($this);
         				'label' => 'Kierunkowe efekty kształcenia',
         				'url' => ['/kek/index'],
         		],
-	            ['label' => 'About', 'url' => ['/site/about']],
-	            ['label' => 'Contact', 'url' => ['/site/contact']],
+	            ['label' => 'O programie', 'url' => ['/site/about']],
+	            ['label' => 'Kontakt', 'url' => ['/site/contact']],
 	            Yii::$app->user->isGuest ?
 	                ['label' => 'Zaloguj', 'url' => ['/user/login']] :
 	                [

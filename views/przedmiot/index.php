@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
@@ -33,7 +34,19 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'kierunekStudiow_id',
             // 'published',
             // 'user_id',
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn',
+            		'template'=>'{view} {update} {delete}',
+            		'buttons'=>
+            		[
+            			'update' => function($url, $model, $key)
+            			{
+	        				$icon = '<span class="glyphicon glyphicon-pencil"></span>';
+	        				$label = 'Edytuj';
+	        				$url = Url::to(["update", 'id' =>$model -> id, 'step' => '1']);
+							return Html::a($icon, $url, ['title' => $label]);
+						}
+    				]
+    		],
         ],
     ]); ?>
 
