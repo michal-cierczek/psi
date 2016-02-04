@@ -132,7 +132,7 @@ class Przedmiot extends \yii\db\ActiveRecord
     }
     
     public function getNazwaSpec(){
-    	return $this->specjalnosc->nazwa;
+    	return $this->specjalnosc ?  $this->specjalnosc->nazwa : '-';    
     }
     public function getAutorName()
     {

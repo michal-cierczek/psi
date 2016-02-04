@@ -2,42 +2,61 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\KursSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Kurs';
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="kurs-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p>
-        <?= Html::a('Create Kurs', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+   	<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+  		Dodaj Cel
+	</button>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
             'formaProwadzeniaZajec',
             'CMPS',
             'ZZU',
             'formaZaliczenia',
-            // 'bKECTS',
-            // 'pECTS',
-            // 'ECTS',
-            // 'czyKonczacy',
-            // 'przedmiot_id',
-
-            ['class' => 'yii\grid\ActionColumn'],
+        	'ECTS',
+            'bKECTS',
+            'pECTS',
+            'czyKonczacy',
+            [
+            	'class' => 'yii\grid\ActionColumn',
+            	'controller' => 'cel-kp',
+            	'template' => '{update} {del}',
+                'buttons' => 
+            		[
+						'del' => function($url, $model, $key){
+        						$icon = '<span class="glyphicon glyphicon-trash"></span>';
+        						$label = 'Usun';
+        						$url = Url::to(["/cel-kp/delete", 'id' =>$model -> id, 'kid' => $model->przedmiot_id]);
+								return Html::a($icon, $url, ['title' => $label]);
+								}
+						                		
+    				]
+            ],
         ],
     ]); ?>
-
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Dodaj kurs</h4>
+      </div>
+      <div class="modal-body">
+      <?= $this->render('/kurs/_form', ['model' => $model])?>
+      </div>
+    </div>
+  </div>
+</div>
+
