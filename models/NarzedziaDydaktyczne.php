@@ -7,7 +7,7 @@ use Yii;
 /**
  * This is the model class for table "narzedziaDydaktyczne".
  *
- * @property integer $idnarzedziaDydaktyczne
+ * @property integer $id
  * @property string $symbol
  * @property string $opis
  * @property integer $przedmiot_id
@@ -43,7 +43,7 @@ class NarzedziaDydaktyczne extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'idnarzedziaDydaktyczne' => 'Idnarzedzia Dydaktyczne',
+            'id' => 'Id',
             'symbol' => 'Symbol',
             'opis' => 'Opis',
             'przedmiot_id' => 'Przedmiot ID',

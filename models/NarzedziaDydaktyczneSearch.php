@@ -18,7 +18,7 @@ class NarzedziaDydaktyczneSearch extends NarzedziaDydaktyczne
     public function rules()
     {
         return [
-            [['idnarzedziaDydaktyczne', 'przedmiot_id'], 'integer'],
+            [['id', 'przedmiot_id'], 'integer'],
             [['symbol', 'opis'], 'safe'],
         ];
     }
@@ -56,7 +56,7 @@ class NarzedziaDydaktyczneSearch extends NarzedziaDydaktyczne
         }
 
         $query->andFilterWhere([
-            'idnarzedziaDydaktyczne' => $this->idnarzedziaDydaktyczne,
+            'id' => $this->id,
             'przedmiot_id' => $this->przedmiot_id,
         ]);
 
