@@ -126,6 +126,9 @@ class Przedmiot extends \yii\db\ActiveRecord
     public function getNazwaKierunku(){
     	return $this->kierunekStudiow->opis;
     }
+    public function getCykl(){
+    	return $this->kierunekStudiow->cykl->data;
+    }
     
     public function getSpecjalnosc(){
     	return $this->hasOne(Specjalnosc::className(), ['id' => 'specjalnosc_id']);
