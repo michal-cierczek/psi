@@ -43,7 +43,7 @@ class Kek extends \yii\db\ActiveRecord
     {
         return [
             [['symbol', 'opis', 'Cykl_id', 'kategoria'], 'required'],
-            [['Cykl_id', 'kategoria'], 'integer'],
+            ['kategoria', 'integer'],
             [['symbol'], 'string', 'max' => 45],
             [['opis'], 'string', 'max' => 255]
         ];
@@ -58,18 +58,11 @@ class Kek extends \yii\db\ActiveRecord
             'id' => 'ID',
             'symbol' => 'Symbol',
             'opis' => 'Opis',
-            'Cykl_id' => 'Cykl ID',
             'kategoria' => 'Kategoria',
         ];
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCykl()
-    {
-        return $this->hasOne(Cykl::className(), ['id' => 'Cykl_id']);
-    }
+
 
     /**
      * @return \yii\db\ActiveQuery

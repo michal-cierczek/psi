@@ -18,7 +18,7 @@ class KekSearch extends Kek
     public function rules()
     {
         return [
-            [['id', 'Cykl_id', 'kategoria'], 'integer'],
+            [['id', 'kategoria'], 'integer'],
             [['symbol', 'opis'], 'safe'],
         ];
     }
@@ -57,7 +57,6 @@ class KekSearch extends Kek
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'Cykl_id' => $this->Cykl_id,
             'kategoria' => $this->kategoria,
         ]);
 

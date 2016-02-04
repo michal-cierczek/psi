@@ -36,16 +36,28 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
-            Yii::$app->user->isGuest ?
-                ['label' => 'Zaloguj', 'url' => ['/user/login']] :
-                [
-                    'label' => 'Wyloguj (' . Yii::$app->user->identity->username . ')',
-                    'url' => ['/user/logout'],
-                    'linkOptions' => ['data-method' => 'post']
-                ],
+        		['label' => 'Home', 'url' => ['/site/index']],
+        		Yii::$app->user->isGuest ?
+        			['label' => 'Przeglądaj kartę przedmiotu', 'url' => ['/site/index']] :
+        			[
+        			'label' => 'Karta przedmiotu', 
+        			'url' => ['/przedmiot/index'],
+        			],
+        		Yii::$app->user->isGuest ?
+        		['label' => 'Kierunkowe efekty kształcenia', 'url' => ['/site/index']] :
+        		[
+        				'label' => 'Kierunkowe efekty kształcenia',
+        				'url' => ['/kek/index'],
+        		],
+	            ['label' => 'About', 'url' => ['/site/about']],
+	            ['label' => 'Contact', 'url' => ['/site/contact']],
+	            Yii::$app->user->isGuest ?
+	                ['label' => 'Zaloguj', 'url' => ['/user/login']] :
+	                [
+	                    'label' => 'Wyloguj (' . Yii::$app->user->identity->username . ')',
+	                    'url' => ['/user/logout'],
+	                    'linkOptions' => ['data-method' => 'post']
+	                ],
         		
         	Yii::$app->user->isGuest ?
         		['label' => 'Rejestracja', 'url' => ['/user/register']] :
