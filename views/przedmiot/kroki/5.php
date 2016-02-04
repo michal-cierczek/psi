@@ -10,7 +10,7 @@ use yii\grid\GridView;
 
 <div class="przedmiot-form">
 
-	<?=	$this -> render('/celKP/index', ['dataProvider' => $model, 'model' => $forModal, 'kid' => $id]) ?>
+	<?=	$this -> render('/pek/index', ['dataProvider' => $model, 'model' => $forModal, 'kid' => $id]) ?>
    <div class="pull-right">
         <?= Html::a('Dalej', ['/przedmiot/update', 'id' => $id, 'step' => 6], ['class' => 'btn btn-primary']) ?>
     </div>

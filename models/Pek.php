@@ -34,10 +34,9 @@ class Pek extends \yii\db\ActiveRecord
     {
         return [
             [['symbol', 'opis', 'kategoria', 'przedmiot_id'], 'required'],
-            [['przedmiot_id'], 'integer'],
             [['symbol', 'kategoria'], 'string', 'max' => 45],
-            [['opis'], 'string', 'max' => 255],
-            [['symbol'], 'unique']
+            [['opis'], 'string'],
+        	[['przedmiot_id'], 'integer'],
         ];
     }
 

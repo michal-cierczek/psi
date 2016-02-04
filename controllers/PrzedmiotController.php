@@ -13,6 +13,8 @@ use app\models\CelKPSearch;
 use app\models\KursSearch;
 use app\models\CelKP;
 use app\models\Kurs;
+use app\models\Pek;
+use app\models\PekSearch;
 
 /**
  * PrzedmiotController implements the CRUD actions for Przedmiot model.
@@ -108,6 +110,11 @@ class PrzedmiotController extends Controller
     			$searchModel = new CelKPSearch();
         		$model = $searchModel->search(['przedmiot_id'=> $id]);
     			break;
+    		case '5': // celKP
+    			$forModal = new Pek();
+    			$searchModel = new PekSearch();
+    			$model = $searchModel->search(['przedmiot_id'=> $id]);
+    			break;
     		case '9': // literatura
     			if(!($model = Literatura::find() -> where(['przedmiot_id' => $id]) -> one()))
     				$model = new Literatura();
@@ -118,7 +125,7 @@ class PrzedmiotController extends Controller
     			break;
     	}
     	
-    	if ($step != 2 && $step != 4 && $model->load(Yii::$app->request->post()) && $model->save()) {
+    	if ($step != 2 && $step != 4 && $step != 5 && $model->load(Yii::$app->request->post()) && $model->save()) {
     		$step++;
     		return $this->redirect(['update', 'id' => $id, 'step'=>$step]);
     	}else{
@@ -127,6 +134,9 @@ class PrzedmiotController extends Controller
     		}
     		elseif($step==2 && $forModal->load(Yii::$app->request->post()) && $forModal->save()){
     			$forModal = new Kurs();
+    		}
+    		elseif($step==5 && $forModal->load(Yii::$app->request->post()) && $forModal->save()){
+    			$forModal = new Pek();
     		}
     	}
     	return $this->render('update', ['model' => $model, 'id' => $id, 'step' => $step, 'forModal' => $forModal]);      

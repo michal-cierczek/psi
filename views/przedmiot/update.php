@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = 'Update';
 				['label' => 'Kursy', 'url' => Url::to(['update', 'id' => $id, 'step'=>'2'])],
 				['label' => 'Wymagania', 'url' => Url::to(['update', 'id' => $id, 'step'=>'3'])],
 				['label' => 'Cele przedmiotu', 'url' => Url::to(['update', 'id' => $id, 'step'=>'4'])],
-				['label' => 'PEK', 'url' => Url::to(['update', 'id' => $id, 'step'=>5])],
+				['label' => 'PEK', 'url' => Url::to(['update', 'id' => $id, 'step'=>'5'])],
 				['label' => 'Treści programowe', 'url' => Url::to(['update', 'id' => $id, 'step'=>'6'])],
 				['label' => 'Narzędzia dydaktyczne', 'url' => Url::to(['update', 'id' => $id, 'step'=>'7'])],
 				['label' => 'Ocena osiągnięcia PEK', 'url' => Url::to(['update', 'id' => $id, 'step'=>'8'])],
