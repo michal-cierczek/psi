@@ -18,6 +18,13 @@ use Yii;
  */
 class TresciProgramowe extends \yii\db\ActiveRecord
 {
+	const formaProwadzeniaNames = [
+			'0' => 'Ćwiczenia',
+			'1' => 'Laboratorium',
+			'2' => 'Wykład',
+			'3' => 'Seminarium',
+			'4' => 'Projekt'
+	];
     /**
      * @inheritdoc
      */

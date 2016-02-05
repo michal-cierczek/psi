@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'liczbaGodzin')->textInput() ?>
 
-    <?= $form->field($model, 'formaZajec')->dropDownList(['P','W','S','L','C']) ?>
+    <?= $form->field($model, 'formaZajec')->dropDownList(['Ćwiczenia', 'Laboratorium', 'Wykład', 'Seminarium', 'Projekt']) ?>
 
     <?= $form->field($model, 'przedmiot_id')->hiddenInput(['value' => $_GET['id']])->label(false) ?>
     

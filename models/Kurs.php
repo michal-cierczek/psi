@@ -22,6 +22,21 @@ use Yii;
  */
 class Kurs extends \yii\db\ActiveRecord
 {
+	const formaZaliczeniaNames = [
+			'0' => 'Zaliczenie',
+			'1' => 'Egzamin',
+	];
+	const formaProwadzeniaNames = [
+			'0' => 'Ćwiczenia',
+			'1' => 'Laboratorium',
+			'2' => 'Wykład',
+			'3' => 'Seminarium',
+			'4' => 'Projekt'
+	];
+	const czyKonczacyNames = [
+			'0' => 'Nie',
+			'1' => 'Tak'
+	];
     /**
      * @inheritdoc
      */

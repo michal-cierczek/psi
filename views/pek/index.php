@@ -3,6 +3,9 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\Url;
+use yii\grid\DataColumn;
+use app\models\Pek;
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\PekSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -22,7 +25,13 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
         	'symbol',
             'opis:ntext',
-        	'kategoria',
+        	[ // 
+        		'class' => DataColumn::className(),
+        		'attribute' => 'kategoria',
+        		'value' => function($model){
+        		return Pek::categoryName[$model->kategoria];
+        		}
+        	],
             [
             	'class' => 'yii\grid\ActionColumn',
             	'controller' => 'pek',

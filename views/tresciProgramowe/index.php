@@ -3,6 +3,9 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\Url;
+use yii\grid\DataColumn;
+use app\models\TresciProgramowe;
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\TresciProgramoweSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -23,7 +26,14 @@ $this->params['breadcrumbs'][] = $this->title;
         	'symbol',
             'opis:ntext',
         	'liczbaGodzin',
-        	'formaZajec',
+        	[ // forma prowadzenia zajęć
+        		'class' => DataColumn::className(),
+        		'attribute' => 'formaZajec',
+        		'label' => 'Forma prowadzenia zajęć',
+        		'value' => function($model){
+        		return TresciProgramowe::formaProwadzeniaNames[$model->formaZajec];
+        		}
+        	],
             [
             	'class' => 'yii\grid\ActionColumn',
             	'controller' => 'tresci-programowe',

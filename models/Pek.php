@@ -20,10 +20,11 @@ use Yii;
 class Pek extends \yii\db\ActiveRecord
 {
 	const categoryName = [
-			'1' => 'Wiedza',
-			'2' => 'Umiejętności',
-			'3' => 'Kompetencje społeczne'
+			'0' => 'Wiedza',
+			'1' => 'Umiejętności',
+			'2' => 'Kompetencje społeczne'
 	];
+	
     /**
      * @inheritdoc
      */

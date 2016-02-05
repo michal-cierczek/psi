@@ -11,8 +11,8 @@ use yii\widgets\ActiveForm;
 <div class="kurs-form">
 
     <?php $form = ActiveForm::begin(); ?>
-
-    <?= $form->field($model, 'formaProwadzeniaZajec')->dropDownList(['Wykład', 'Ćwieczenia', 'Laboratorium', 'Projekt', 'Seminarium']) ?>
+    
+    <?= $form->field($model, 'formaProwadzeniaZajec')->dropDownList(['Ćwiczenia', 'Laboratorium', 'Wykład', 'Seminarium', 'Projekt']) ?>
 
     <?= $form->field($model, 'CMPS')->textInput() ?>
 

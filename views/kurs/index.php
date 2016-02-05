@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\Url;
+use yii\grid\DataColumn;
+use app\models\Kurs;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\KursSearch */
@@ -18,15 +20,32 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-            'formaProwadzeniaZajec',
-        	'formaZaliczenia',
+        	[ // forma prowadzenia zajęć
+        		'class' => DataColumn::className(),
+        		'attribute' => 'formaProwadzeniaZajec',
+        		'value' => function($model){
+        		return Kurs::formaProwadzeniaNames[$model->formaProwadzeniaZajec];
+        		}
+        	],
+        	[ // forma zaliczenia
+        		'class' => DataColumn::className(),
+        		'attribute' => 'formaZaliczenia',
+        		'value' => function($model){
+        		return Kurs::formaZaliczeniaNames[$model->formaZaliczenia];
+        		}
+        	],
             ['attribute' => 'CMPS', 'label'=>'CNPS'],
             ['attribute' => 'ZZU', 'label'=>'ZZU'],
         	['attribute' => 'ECTS', 'label'=>'ECTS'],
             ['attribute' => 'bKECTS', 'label'=>'BK-ECTS'],
             ['attribute' => 'pECTS', 'label'=>'P-ECTS'],
-            ['attribute' => 'czyKonczacy', 'label'=>'Czy Kończacy'],
+            [ // czy kończący
+	            'class' => DataColumn::className(),
+	            'attribute' => 'czyKonczacy',
+	            'value' => function($model){
+	            return Kurs::czyKonczacyNames[$model->czyKonczacy];
+	            }
+            ],
             [
             	'class' => 'yii\grid\ActionColumn',
             	'controller' => 'kurs',
@@ -39,7 +58,6 @@ $this->params['breadcrumbs'][] = $this->title;
         						$url = Url::to(["/kurs/delete", 'id' =>$model -> id, 'kid' => $model->przedmiot_id]);
 								return Html::a($icon, $url, ['title' => $label]);
 								}
-						                		
     				]
             ],
         ],
