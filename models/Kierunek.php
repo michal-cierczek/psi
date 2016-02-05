@@ -9,12 +9,11 @@ use Yii;
  *
  * @property integer $id
  * @property string $opis
- * @property integer $cykl_id
+ * @property string $cykl
  * @property integer $stopien
  * @property string $skrot
  *
  * @property Kek[] $keks
- * @property Cykl $cykl
  * @property Przedmiot[] $przedmiots
  * @property Specjalnosc[] $specjalnoscs
  */
@@ -34,10 +33,10 @@ class Kierunek extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['opis', 'cykl_id', 'stopien'], 'required'],
-            [['cykl_id', 'stopien'], 'integer'],
+            [['opis', 'cykl', 'stopien'], 'required'],
+            [['stopien'], 'integer'],
             [['opis'], 'string', 'max' => 255],
-            [['skrot'], 'string', 'max' => 10]
+            [['skrot', 'cykl'], 'string', 'max' => 10]
         ];
     }
 
@@ -52,6 +51,7 @@ class Kierunek extends \yii\db\ActiveRecord
             'cykl_id' => 'Cykl ID',
             'stopien' => 'Stopien',
             'skrot' => 'Skrot',
+        	'cykl' => 'Cykl'
         ];
     }
 
@@ -66,24 +66,8 @@ class Kierunek extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCykl()
-    {
-        return $this->hasOne(Cykl::className(), ['id' => 'cykl_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getPrzedmiots()
     {
         return $this->hasMany(Przedmiot::className(), ['kierunekStudiow_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getSpecjalnoscs()
-    {
-        return $this->hasMany(Specjalnosc::className(), ['kierunekStudiow_id' => 'id']);
     }
 }

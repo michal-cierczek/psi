@@ -22,15 +22,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'opis',
         	[
-        		'attribute' => 'cykl_id',
-        		'value' => 'cykl.data',
-        		'label' => 'Cykl'
+        		'attribute' => 'opis',
+        		'label' => 'Nazwa'
         	],
             'stopien',
             'skrot',
-
+        	'cykl',
             ['class' => 'yii\grid\ActionColumn',
             	'controller' => 'kierunek',
             	'template' => '{update} {view}',

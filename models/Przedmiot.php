@@ -122,10 +122,10 @@ class Przedmiot extends \yii\db\ActiveRecord
     	return $this->kierunekStudiow ? $this->kierunekStudiow->opis : null;
     }
     public function getCykl(){
-    	return $this->kierunekStudiow->cykl->data;
+    	return $this->kierunekStudiow->cykl;
     }
     public function getNazwaSpec(){
-    	return $this->kierunekStudiow ?  $this->kierunekStudiow->specjalnosc : '-';    
+    	return $this->kierunekStudiow ?  $this->kierunekStudiow->specjalnosc : null;    
     }
     public function getAutorName()
     {
