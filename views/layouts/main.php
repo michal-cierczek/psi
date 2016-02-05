@@ -38,13 +38,13 @@ AppAsset::register($this);
         'items' => [
         		['label' => 'Strona główna', 'url' => ['/site/index']],
         		Yii::$app->user->isGuest ?
-        			['label' => 'Przeglądaj kartę przedmiotu', 'url' => ['/site/index']] :
+        			['label' => 'Przeglądaj karty przedmiotu', 'url' => ['/przedmiot/index2']] :
         			[
         			'label' => 'Karta przedmiotu', 
         			'url' => ['/przedmiot/index'],
         			],
         		Yii::$app->user->isGuest ?
-        		['label' => 'Kierunkowe efekty kształcenia', 'url' => ['/site/index']] :
+        		['label' => 'Kierunkowe efekty kształcenia', 'url' => ['/kierunek/index']] :
         		[
         				'label' => 'Kierunkowe efekty kształcenia',
         				'url' => ['/kierunek/index'],

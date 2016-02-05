@@ -21,6 +21,7 @@ use app\models\TresciProgramowe;
 use app\models\TresciProgramoweSearch;
 use yii\filters\AccessControl;
 use yii\data\SqlDataProvider;
+
 use app\models\Ocena;
 use app\models\OcenaSearch;
 
@@ -83,6 +84,7 @@ class PrzedmiotController extends Controller
     			'dataProvider' => $dataProvider,
     	]);
     }
+   
 
     /**
      * Displays a single Przedmiot model.

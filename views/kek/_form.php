@@ -15,7 +15,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'symbol')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'opis')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($model, 'kategoria')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'kategoria')->dropDownList(['Wiedza', 'Umiejętności', 'Kompetencje Społeczne']) ?>
 
     <?= $form->field($model, 'kierunekStudiow_id')->hiddenInput(['value' => $_GET['id']])->label(false) ?>
     

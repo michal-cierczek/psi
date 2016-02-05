@@ -3,11 +3,12 @@
 namespace app\models;
 
 use Yii;
+use app\models\Pek;
 
 /**
  * This is the model class for table "ocenaOsiagnieciaPek".
  *
- * @property integer $idocenaOsiagnieciaPek
+ * @property integer $id
  * @property string $symbol
  * @property string $opis
  *
@@ -42,7 +43,7 @@ class Ocena extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'idocenaOsiagnieciaPek' => 'Idocena Osiagniecia Pek',
+            'id' => 'Idocena Osiagniecia Pek',
             'symbol' => 'Symbol',
             'opis' => 'Opis',
         ];
@@ -53,7 +54,7 @@ class Ocena extends \yii\db\ActiveRecord
      */
     public function getOcenaOsiagnieciaPekpeks()
     {
-        return $this->hasMany(OcenaOsiagnieciaPekpek::className(), ['ocenaOsiagnieciaPek_id' => 'idocenaOsiagnieciaPek']);
+        return $this->hasMany(OcenaOsiagnieciaPekpek::className(), ['ocenaOsiagnieciaPek_id' => 'id']);
     }
 
     /**
@@ -61,6 +62,10 @@ class Ocena extends \yii\db\ActiveRecord
      */
     public function getPeks()
     {
-        return $this->hasMany(Pek::className(), ['id' => 'pek_id'])->viaTable('ocenaOsiagnieciaPekpek', ['ocenaOsiagnieciaPek_id' => 'idocenaOsiagnieciaPek']);
+        return $this->hasMany(Pek::className(), ['id' => 'pek_id'])->viaTable('ocenaOsiagnieciaPekpek', ['ocenaOsiagnieciaPek_id' => 'id']);
+    }
+    public function getallpeks($id)
+    {
+    	Pek::find()->where(['przedmiot_id'=>$id])->asArray()->all();
     }
 }

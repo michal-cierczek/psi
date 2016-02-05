@@ -18,7 +18,7 @@ class OcenaSearch extends Ocena
     public function rules()
     {
         return [
-            [['idocenaOsiagnieciaPek'], 'integer'],
+            [['id'], 'integer'],
             [['symbol', 'opis'], 'safe'],
         ];
     }
@@ -56,7 +56,7 @@ class OcenaSearch extends Ocena
         }
 
         $query->andFilterWhere([
-            'idocenaOsiagnieciaPek' => $this->idocenaOsiagnieciaPek,
+            'id' => $this->id,
         ]);
 
         $query->andFilterWhere(['like', 'symbol', $this->symbol])

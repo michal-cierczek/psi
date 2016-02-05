@@ -2,35 +2,58 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-
+use yii\helpers\Url;
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\OcenaSearch */
+/* @var $searchModel app\models\PekSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Oceny';
+$this->title = 'Ocena stopnia osiągnięcia PEK';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="ocena-index">
+<div class="pek-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p>
-        <?= Html::a('Create Ocena', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+  <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+  		Dodaj Ocenę!
+	</button>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'idocenaOsiagnieciaPek',
-            'symbol',
+        	'symbol',
             'opis:ntext',
-
-            ['class' => 'yii\grid\ActionColumn'],
+        	'peks',
+            [
+            	'class' => 'yii\grid\ActionColumn',
+            	'controller' => 'ocena',
+            	'template' => '{del}',
+                'buttons' => 
+            		[
+						'del' => function($url, $model, $key){
+        						$icon = '<span class="glyphicon glyphicon-trash"></span>';
+        						$label = 'Usun';
+        						$url = Url::to(["/ocena/delete", 'id' =>$model -> id, 'kid' => $model->przedmiot_id]);
+								return Html::a($icon, $url, ['title' => $label]);
+								}
+						                		
+    				]
+    		],
+        		
         ],
     ]); ?>
+</div>
 
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Dodaj Ocenę!</h4>
+      </div>
+      <div class="modal-body">
+      <?= $this->render('/ocena/_form', ['model' => $model])?>
+      </div>
+    </div>
+  </div>
 </div>
