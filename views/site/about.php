@@ -4,15 +4,15 @@
 
 use yii\helpers\Html;
 
-$this->title = 'About';
+$this->title = 'O programie';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-about">
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        This is the About page. You may modify the following file to customize its content:
+        Jest to program pozwalający na operacje CRUD karty przedmiotu, CRUD PEK oraz mozliwość 
+        generowania dokumentu karty przedmiotu
     </p>
 
-    <code><?= __FILE__ ?></code>
 </div>

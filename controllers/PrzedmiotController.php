@@ -17,6 +17,8 @@ use app\models\Pek;
 use app\models\PekSearch;
 use app\models\NarzedziaDydaktyczne;
 use app\models\NarzedziaDydaktyczneSearch;
+use app\models\TresciProgramowe;
+use app\models\TresciProgramoweSearch;
 
 /**
  * PrzedmiotController implements the CRUD actions for Przedmiot model.
@@ -117,6 +119,11 @@ class PrzedmiotController extends Controller
     			$searchModel = new PekSearch();
     			$model = $searchModel->search(['przedmiot_id'=> $id]);
     			break;
+    		case '6': // tresci programowe
+    			$forModal = new TresciProgramowe();
+    			$searchModel = new TresciProgramoweSearch();
+    			$model = $searchModel->search(['przedmiot_id'=> $id]);
+    			break;
     		case '7': // narzedziaDydaktyczne
     			$forModal = new NarzedziaDydaktyczne();
     			$searchModel = new NarzedziaDydaktyczneSearch();
@@ -132,7 +139,7 @@ class PrzedmiotController extends Controller
     			break;
     	}
     	
-    	if ($step != 2 && $step != 4 && $step != 5 && $step != 7 && $model->load(Yii::$app->request->post()) && $model->save()) {
+    	if ($step != 2 && $step != 4 && $step != 5 && $step != 6 && $step != 7 && $model->load(Yii::$app->request->post()) && $model->save()) {
     		$step++;
     		return $this->redirect(['update', 'id' => $id, 'step'=>$step]);
     	}else{
@@ -144,6 +151,9 @@ class PrzedmiotController extends Controller
     		}
     		elseif($step==5 && $forModal->load(Yii::$app->request->post()) && $forModal->save()){
     			$forModal = new Pek();
+    		}
+    		elseif($step==6 && $forModal->load(Yii::$app->request->post()) && $forModal->save()){
+    			$forModal = new TresciProgramowe();
     		}
     		elseif($step==7 && $forModal->load(Yii::$app->request->post()) && $forModal->save()){
     			$forModal = new NarzedziaDydaktyczne();

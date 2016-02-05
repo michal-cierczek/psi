@@ -47,7 +47,7 @@ AppAsset::register($this);
         		['label' => 'Kierunkowe efekty kształcenia', 'url' => ['/site/index']] :
         		[
         				'label' => 'Kierunkowe efekty kształcenia',
-        				'url' => ['/kek/index'],
+        				'url' => ['/kierunekStudiow/index'],
         		],
 	            ['label' => 'O programie', 'url' => ['/site/about']],
 	            ['label' => 'Kontakt', 'url' => ['/site/contact']],
