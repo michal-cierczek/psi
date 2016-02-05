@@ -12,11 +12,12 @@ use Yii;
  * @property integer $cykl_id
  * @property integer $stopien
  * @property string $skrot
+ * @property string $specjalnosc
  *
  * @property Kek[] $keks
  * @property Cykl $cykl
  * @property Przedmiot[] $przedmiots
- * @property Specjalnosc[] $specjalnoscs
+ * 
  */
 class KierunekStudiow extends \yii\db\ActiveRecord
 {
@@ -37,7 +38,8 @@ class KierunekStudiow extends \yii\db\ActiveRecord
             [['opis', 'cykl_id', 'stopien'], 'required'],
             [['cykl_id', 'stopien'], 'integer'],
             [['opis'], 'string', 'max' => 255],
-            [['skrot'], 'string', 'max' => 10]
+            [['skrot'], 'string', 'max' => 10],
+        		[['specjalnosc'], 'string']
         ];
     }
 
@@ -52,6 +54,7 @@ class KierunekStudiow extends \yii\db\ActiveRecord
             'cykl_id' => 'Cykl ID',
             'stopien' => 'Stopien',
             'skrot' => 'Skrot',
+        	'specjalnosc' => 'Specjalność'
         ];
     }
 
@@ -82,8 +85,5 @@ class KierunekStudiow extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getSpecjalnoscs()
-    {
-        return $this->hasMany(Specjalnosc::className(), ['kierunekStudiow_id' => 'id']);
-    }
+
 }

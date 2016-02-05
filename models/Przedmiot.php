@@ -15,10 +15,11 @@ use Yii;
  * @property integer $kierunekStudiow_id
  * @property integer $published
  * @property integer $user_id
+ * @property string $literatura
+ * @property string $specjalnosc
  *
  * @property CelKP[] $celKPs
  * @property Kurs[] $kurs
- * @property Literatura[] $literaturas
  * @property KierunekStudiow $kierunekStudiow
  * @property User $user
  * @property PrzedmiotKek[] $przedmiotKeks
@@ -44,7 +45,7 @@ class Przedmiot extends \yii\db\ActiveRecord
         return [
             [['kodKursu', 'wymaganie', 'nazwaPolska', 'nazwaAngielska', 'kierunekStudiow_id', 'published', 'user_id'], 'required'],
             [['kierunekStudiow_id', 'published', 'user_id'], 'integer'],
-            [['kodKursu', 'wymaganie'], 'string'],
+            [['kodKursu', 'wymaganie', 'specjalnosc', 'literatura'], 'string'],
             [['nazwaPolska', 'nazwaAngielska'], 'string', 'max' => 100],
             [['kodKursu'], 'unique']
         ];
@@ -64,7 +65,8 @@ class Przedmiot extends \yii\db\ActiveRecord
             'kierunekStudiow_id' => 'Kierunek Studiow ID',
             'published' => 'Opublikownany',
             'user_id' => 'User ID',
-        	'grupaKursow' => 'Grupa kursów'
+        	'grupaKursow' => 'Grupa kursów',
+        	'literatura' => 'Literatura'
         ];
     }
 
@@ -84,13 +86,6 @@ class Przedmiot extends \yii\db\ActiveRecord
         return $this->hasMany(Kurs::className(), ['przedmiot_id' => 'id']);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getLiteraturas()
-    {
-        return $this->hasMany(Literatura::className(), ['przedmiot_id' => 'id']);
-    }
 
     /**
      * @return \yii\db\ActiveQuery
@@ -131,12 +126,8 @@ class Przedmiot extends \yii\db\ActiveRecord
     	return $this->kierunekStudiow->cykl->data;
     }
     
-    public function getSpecjalnosc(){
-    	return $this->hasOne(Specjalnosc::className(), ['id' => 'specjalnosc_id']);
-    }
-    
     public function getNazwaSpec(){
-    	return $this->specjalnosc ?  $this->specjalnosc->nazwa : '-';    
+    	return $this->kierunekStusiow ?  $this->kierunekStudiow->specjalnosc : '-';    
     }
     public function getAutorName()
     {
