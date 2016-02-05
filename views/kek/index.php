@@ -19,10 +19,12 @@ $this->params['breadcrumbs'][] = $this->title;
 	</button>
 
     <?= GridView::widget([
+    	'filterModel' => $searchModel,
         'dataProvider' => $dataProvider,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
         	'symbol',
+        	'kierunekStudiow_id', 
             'opis:ntext',
         	[
         			'class' => DataColumn::className(),
@@ -30,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
         			'value' => function($model){
         			return Kek::categoryName[$model->kategoria];
         		}
-        		],
+        	],
             [
             	'class' => 'yii\grid\ActionColumn',
             	'controller' => 'kek',
