@@ -47,7 +47,7 @@ AppAsset::register($this);
         		['label' => 'Kierunkowe efekty kształcenia', 'url' => ['/site/index']] :
         		[
         				'label' => 'Kierunkowe efekty kształcenia',
-        				'url' => ['/kierunekStudiow/index'],
+        				'url' => ['/kierunek/index'],
         		],
 	            ['label' => 'O programie', 'url' => ['/site/about']],
 	            ['label' => 'Kontakt', 'url' => ['/site/contact']],
@@ -71,9 +71,6 @@ AppAsset::register($this);
     ?>
 
     <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
         <?= $content ?>
     </div>
 </div>

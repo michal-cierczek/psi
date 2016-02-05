@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\OcenaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Ocenas';
+$this->title = 'Oceny';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="ocena-index">

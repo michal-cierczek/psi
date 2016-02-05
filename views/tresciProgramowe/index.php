@@ -7,7 +7,7 @@ use yii\helpers\Url;
 /* @var $searchModel app\models\TresciProgramoweSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Tresci Programowes';
+$this->title = 'Tresci Programowe';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="tresci-programowe-index">
@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
             	'class' => 'yii\grid\ActionColumn',
             	'controller' => 'tresci-programowe',
-            	'template' => '{update} {del}',
+            	'template' => '{del}',
                 'buttons' => 
             		[
 						'del' => function($url, $model, $key){

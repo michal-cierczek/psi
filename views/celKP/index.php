@@ -7,7 +7,8 @@ use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\CelKPSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
-
+$this->title = 'Cele Przedmiotu';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="cel-kp-index">
 	<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
@@ -22,7 +23,7 @@ use yii\helpers\Url;
             [
             	'class' => 'yii\grid\ActionColumn',
             	'controller' => 'cel-kp',
-            	'template' => '{update} {del}',
+            	'template' => '{del}',
                 'buttons' => 
             		[
 						'del' => function($url, $model, $key){

@@ -10,8 +10,8 @@ use Yii;
  * @property integer $id
  * @property string $symbol
  * @property string $opis
- * @property integer $Cykl_id
  * @property integer $kategoria
+ * @property integer $kierunekStudiow_id
  *
  * @property Cykl $cykl
  * @property MekKek[] $mekKeks
@@ -42,10 +42,11 @@ class Kek extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['symbol', 'opis', 'Cykl_id', 'kategoria'], 'required'],
+            [['symbol', 'opis', 'kategoria'], 'required'],
             ['kategoria', 'integer'],
             [['symbol'], 'string', 'max' => 45],
-            [['opis'], 'string', 'max' => 255]
+            [['opis'], 'string', 'max' => 255],
+        	[['kierunekStudiow_id'], 'safe']
         ];
     }
 

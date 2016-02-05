@@ -7,7 +7,7 @@ use yii\helpers\Url;
 /* @var $searchModel app\models\NarzedziaDydaktyczneSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Narzedzia Dydaktycznes';
+$this->title = 'Narzedzia Dydaktyczne';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="narzedzia-dydaktyczne-index">
@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
             	'class' => 'yii\grid\ActionColumn',
             	'controller' => 'narzedzia-dydaktyczne',
-            	'template' => '{update} {del}',
+            	'template' => '{del}',
                 'buttons' => 
             		[
 						'del' => function($url, $model, $key){

@@ -7,11 +7,12 @@ use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\KursSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
-
+$this->title = 'Kursy';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="kurs-index">
    	<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
-  		Dodaj Cel
+  		Dodaj Kurs
 	</button>
 
     <?= GridView::widget([
@@ -29,7 +30,7 @@ use yii\helpers\Url;
             [
             	'class' => 'yii\grid\ActionColumn',
             	'controller' => 'kurs',
-            	'template' => '{update} {del}',
+            	'template' => '{del}',
                 'buttons' => 
             		[
 						'del' => function($url, $model, $key){

@@ -2,44 +2,57 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use yii\grid\DataColumn;
-use app\models\Kek;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\KekSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Keks';
+$this->title = 'Kierunkowe efekty kształcenia';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="kek-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p>
-        <?= Html::a('Create Kek', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+  		Dodaj kierunkowy efekt kształcenia
+	</button>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'symbol',
-            'opis',
-            'Cykl_id',
+        	'symbol',
+            'opis:ntext',
             [
-            	'class' => DataColumn::className(),
-            	'attribute' => 'kategoria',
-            	'label' => 'Kategoria',
-            	'value' => function($model){
-            		return KeK::categoryName[$model->kategoria]; 
-    			}
+            	'class' => 'yii\grid\ActionColumn',
+            	'controller' => 'kek',
+            	'template' => '{del}',
+                'buttons' => 
+            		[
+						'del' => function($url, $model, $key){
+        						$icon = '<span class="glyphicon glyphicon-trash"></span>';
+        						$label = 'Usun';
+        						$url = Url::to(["/kek/delete", 'id' =>$model->id, 'kid' => $model->kierunekStudiow_id]);
+								return Html::a($icon, $url, ['title' => $label]);
+								}
+						                		
+    				]
     		],
-
-            ['class' => 'yii\grid\ActionColumn'],
+        		
         ],
     ]); ?>
+</div>
 
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Dodaj kierunkowy efekt kształcenia</h4>
+      </div>
+      <div class="modal-body">
+      <?= $this->render('/kek/_form', ['model' => $model])?>
+      </div>
+    </div>
+  </div>
 </div>

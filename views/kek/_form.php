@@ -15,10 +15,11 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'symbol')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'opis')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'kategoria')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'Cykl_id')->textInput() ?>
-
-    <?= $form->field($model, 'kategoria')->textInput() ?>
+    <?= $form->field($model, 'kierunekStudiow_id')->hiddenInput(['value' => $_GET['id']])->label(false) ?>
+    
+    
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

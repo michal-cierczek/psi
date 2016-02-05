@@ -8,6 +8,8 @@ use app\models\KierunekSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\Kek;
+use app\models\KekSearch;
 
 /**
  * KierunekController implements the CRUD actions for Kierunek model.
@@ -48,9 +50,11 @@ class KierunekController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        $forModal = new Kek();
+    	$searchModel = new KekSearch();
+    	$model = $searchModel->search(['kierunekStudiow_id'=> $id]);
+
+        return $this->render('view', ['model' => $model, 'id' => $id, 'forModal' => $forModal]);
     }
 
     /**
@@ -77,17 +81,21 @@ class KierunekController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
+    public function actionUpdate($id=null)
     {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
-        }
+    	$forModal=new Kek();
+    	$searchModel = new KekSearch();
+    	$model = $searchModel->search(['kierunekStudiow_id'=> $id]);
+    	
+    	
+    	if($forModal->load(Yii::$app->request->post()) && $forModal->save()){
+        	$forModal = new Kek();
+        	
+    	}
+    	return $this->render('update', ['model' => $model, 'id' => $id, 'forModal' => $forModal]);
+    	
+    	
+    	
     }
 
     /**

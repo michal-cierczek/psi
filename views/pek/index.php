@@ -7,13 +7,13 @@ use yii\helpers\Url;
 /* @var $searchModel app\models\PekSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Peks';
+$this->title = 'Przedmiotowe Efekty Kształcenia';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="pek-index">
 
   <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
-  		Dodaj Pek
+  		Dodaj PEK
 	</button>
 
     <?= GridView::widget([
@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
             	'class' => 'yii\grid\ActionColumn',
             	'controller' => 'pek',
-            	'template' => '{update} {del}',
+            	'template' => '{del}',
                 'buttons' => 
             		[
 						'del' => function($url, $model, $key){

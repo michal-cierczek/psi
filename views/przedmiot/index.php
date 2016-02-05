@@ -8,7 +8,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\PrzedmiotSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Przedmiots';
+$this->title = 'Przedmioty';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="przedmiot-index">
