@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\grid\DataColumn;
+use app\models\Kek;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Kek */
@@ -32,7 +34,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'symbol',
             'opis',
             'Cykl_id',
-            'kategoria',
+        	[
+        			'class' => DataColumn::className(),
+        			'attribute' => 'kategoria',
+        			'value' => function($model){
+        			return Kek::categoryName[$model->kategoria];
+        		}
+        	],
         ],
     ]) ?>
 

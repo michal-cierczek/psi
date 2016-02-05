@@ -86,4 +86,10 @@ class Kierunek extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Specjalnosc::className(), ['kierunekStudiow_id' => 'id']);
     }
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCyklName() {
+    	return $this->cykl ? $this->cykl->data : null;
+    }
 }

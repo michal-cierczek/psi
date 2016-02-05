@@ -55,14 +55,17 @@ class KierunekSearch extends Kierunek
             return $dataProvider;
         }
 
+        
+      	$query->joinWith('cykl');
+      	
         $query->andFilterWhere([
             'id' => $this->id,
-            'cykl_id' => $this->cykl_id,
             'stopien' => $this->stopien,
         ]);
 
         $query->andFilterWhere(['like', 'opis', $this->opis])
-            ->andFilterWhere(['like', 'skrot', $this->skrot]);
+            ->andFilterWhere(['like', 'skrot', $this->skrot])
+        	->andFilterWhere(['like', 'cykl.data', $this->cykl_id]);
 
         return $dataProvider;
     }

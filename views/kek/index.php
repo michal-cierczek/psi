@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
         			'value' => function($model){
         			return Kek::categoryName[$model->kategoria];
         		}
-        		],
+        	],
             [
             	'class' => 'yii\grid\ActionColumn',
             	'controller' => 'kek',
