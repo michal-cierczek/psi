@@ -11,8 +11,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        Jest to program pozwalający na operacje CRUD karty przedmiotu, CRUD PEK oraz mozliwość 
-        generowania dokumentu karty przedmiotu
+        Aplikacja pozwalająca na operacje CRUD karty przedmiotu, CRUD PEK oraz umożliwiająca 
+        generowania dokumentu karty przedmiotu.
     </p>
 
 </div>
