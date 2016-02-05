@@ -100,7 +100,8 @@ class KierunekController extends Controller
     {
     	$forModal=new Kek();
     	$searchModel = new KekSearch();
-    	$model = $searchModel->search(['kierunekStudiow_id'=> $id]);
+    	$model = $searchModel->search(['kierunekStudiow'=>$id]);
+    	
     	
     	
     	if($forModal->load(Yii::$app->request->post()) && $forModal->save()){

@@ -18,7 +18,7 @@ class KekSearch extends Kek
     public function rules()
     {
         return [
-            [['id', 'kategoria'], 'integer'],
+            [['id', 'kierunekStudiow_id', 'kategoria'], 'integer'],
             [['symbol', 'opis'], 'safe'],
         ];
     }
@@ -41,27 +41,12 @@ class KekSearch extends Kek
      */
     public function search($params)
     {
-        $query = Kek::find();
+        $query = Kek::find()->where(['kierunekStudiow_id'=>$params]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
 
-        $this->load($params);
-
-        if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
-            return $dataProvider;
-        }
-
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'kategoria' => $this->kategoria,
-        ]);
-
-        $query->andFilterWhere(['like', 'symbol', $this->symbol])
-            ->andFilterWhere(['like', 'opis', $this->opis]);
 
         return $dataProvider;
     }
