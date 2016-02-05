@@ -41,33 +41,13 @@ class KursSearch extends Kurs
      */
     public function search($params)
     {
-        $query = Kurs::find();
+        $query = Kurs::find()->where(['przedmiot_id'=>$params]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
 
-        $this->load($params);
-
-        if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
-            return $dataProvider;
-        }
-
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'CMPS' => $this->CMPS,
-            'ZZU' => $this->ZZU,
-            'bKECTS' => $this->bKECTS,
-            'pECTS' => $this->pECTS,
-            'ECTS' => $this->ECTS,
-            'czyKonczacy' => $this->czyKonczacy,
-            'przedmiot_id' => $this->przedmiot_id,
-        ]);
-
-        $query->andFilterWhere(['like', 'formaProwadzeniaZajec', $this->formaProwadzeniaZajec])
-            ->andFilterWhere(['like', 'formaZaliczenia', $this->formaZaliczenia]);
+       
 
         return $dataProvider;
     }

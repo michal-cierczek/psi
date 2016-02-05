@@ -41,29 +41,13 @@ class TresciProgramoweSearch extends TresciProgramowe
      */
     public function search($params)
     {
-        $query = TresciProgramowe::find();
+        $query = TresciProgramowe::find()->where(['przedmiot_id'=>$params]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
 
-        $this->load($params);
-
-        if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
-            return $dataProvider;
-        }
-
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'liczbaGodzin' => $this->liczbaGodzin,
-            'przedmiot_id' => $this->przedmiot_id,
-        ]);
-
-        $query->andFilterWhere(['like', 'symbol', $this->symbol])
-            ->andFilterWhere(['like', 'opis', $this->opis])
-            ->andFilterWhere(['like', 'formaZajec', $this->formaZajec]);
+       
 
         return $dataProvider;
     }

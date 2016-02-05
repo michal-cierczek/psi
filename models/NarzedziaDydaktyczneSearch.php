@@ -41,28 +41,13 @@ class NarzedziaDydaktyczneSearch extends NarzedziaDydaktyczne
      */
     public function search($params)
     {
-        $query = NarzedziaDydaktyczne::find();
+        $query = NarzedziaDydaktyczne::find()->where(['przedmiot_id'=>$params]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
 
-        $this->load($params);
-
-        if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
-            return $dataProvider;
-        }
-
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'przedmiot_id' => $this->przedmiot_id,
-        ]);
-
-        $query->andFilterWhere(['like', 'symbol', $this->symbol])
-            ->andFilterWhere(['like', 'opis', $this->opis]);
-
+       
         return $dataProvider;
     }
 }

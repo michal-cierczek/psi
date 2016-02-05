@@ -41,26 +41,13 @@ class OcenaSearch extends Ocena
      */
     public function search($params)
     {
-        $query = Ocena::find();
+        $query = Ocena::find()->where(['przedmiot_id'=>$params]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
 
-        $this->load($params);
-
-        if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
-            return $dataProvider;
-        }
-
-        $query->andFilterWhere([
-            'id' => $this->id,
-        ]);
-
-        $query->andFilterWhere(['like', 'symbol', $this->symbol])
-            ->andFilterWhere(['like', 'opis', $this->opis]);
+       
 
         return $dataProvider;
     }
