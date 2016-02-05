@@ -131,7 +131,7 @@ class PrzedmiotController extends Controller
     	$forModal = null;
     	switch($step){
     		case '1':
-    			if(!($model = Przedmiot::find()->where(['id' => $id, 'user_id' => Yii::$app->user->id])->one()))
+    			if(!($model = Przedmiot::find()->where(['id' => $id])->one()))
     				$model = new Przedmiot();
     			break;
     		case '2':
@@ -169,8 +169,8 @@ class PrzedmiotController extends Controller
     			$model = $searchModel->search(['przedmiot_id'=> $id]);
     			break;
     		case '9': // literatura
-    			if(!($model = Literatura::find() -> where(['przedmiot_id' => $id]) -> one()))
-    				$model = new Literatura();
+    			if(!($model = Przedmiot::find() -> where(['id' => $id]) -> one()))
+    				$model = new Przedmiot();
     			break;
     		case '10': // opiekun
     			if(!($model = Przedmiot::find() -> where(['id' => $id]) -> one()))
