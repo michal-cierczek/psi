@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
         	['attribute' => 'ECTS', 'label'=>'ECTS'],
             ['attribute' => 'bKECTS', 'label'=>'BK-ECTS'],
             ['attribute' => 'pECTS', 'label'=>'P-ECTS'],
-            ['attribute' => 'czyKonczacy', 'format'=>'checkBox', 'label'=>'Czy Kończacy'],
+            ['attribute' => 'czyKonczacy', 'label'=>'Czy Kończacy'],
             [
             	'class' => 'yii\grid\ActionColumn',
             	'controller' => 'kurs',
