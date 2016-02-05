@@ -1,6 +1,8 @@
 <?php
 
 use yii\grid\GridView;
+use yii\grid\DataColumn;
+use app\models\Kek;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\KekSearch */
@@ -17,7 +19,13 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
         	'symbol',
             'opis:ntext',
-        	'kategoria',
+        	[
+        			'class' => DataColumn::className(),
+        			'attribute' => 'kategoria',
+        			'value' => function($model){
+        			return Kek::categoryName[$model->kategoria];
+        		}
+        	],
             [
             	'class' => 'yii\grid\ActionColumn',
             	'controller' => 'kek',
