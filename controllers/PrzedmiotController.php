@@ -19,6 +19,8 @@ use app\models\NarzedziaDydaktyczne;
 use app\models\NarzedziaDydaktyczneSearch;
 use app\models\TresciProgramowe;
 use app\models\TresciProgramoweSearch;
+use yii\filters\AccessControl;
+use yii\data\SqlDataProvider;
 
 /**
  * PrzedmiotController implements the CRUD actions for Przedmiot model.
@@ -34,6 +36,20 @@ class PrzedmiotController extends Controller
                     'delete' => ['post'],
                 ],
             ],
+        		'access' => [
+        				'class' => AccessControl::className(),
+        				'only' => ['index'],
+        				'rules' => [
+        						[
+        								'allow' => true,
+        								'actions' => ['index'],
+        								'roles' => ['@'],
+        						],
+        				],
+        				'denyCallback' => function ($rule, $action) {
+        				throw new \Exception('You are not allowed to access this page');
+        				}
+        				],
         ];
     }
 
@@ -45,11 +61,25 @@ class PrzedmiotController extends Controller
     {
         $searchModel = new PrzedmiotSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+// 		$dataProvider = new SqlDataProvider([
+// 		    'sql' => 'SELECT * FROM przedmiot WHERE user_id=' . Yii::$app->user->id,
+		   
+// 		]);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+    }
+    public function actionIndex2()
+    {
+    	$searchModel = new PrzedmiotSearch();
+    	$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+    
+    	return $this->render('index2', [
+    			'searchModel' => $searchModel,
+    			'dataProvider' => $dataProvider,
+    	]);
     }
 
     /**

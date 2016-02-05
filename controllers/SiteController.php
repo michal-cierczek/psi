@@ -9,6 +9,27 @@ use yii\filters\VerbFilter;
 use app\models\ContactForm;
 
 class SiteController extends Controller {
+	
+	public function behaviors()
+	{
+		return [
+				'access' => [
+						'class' => AccessControl::className(),
+						'only' => ['about','contact'],
+						'rules' => [
+								[
+										'allow' => true,
+										'actions' => ['kP','about','contact',],
+										'roles' => ['@'],
+								],
+						],
+						'denyCallback' => function ($rule, $action) {
+						throw new \Exception('You are not allowed to access this page');
+						}
+						],
+						];
+	}
+	
 	public function actions() {
 		return [ 
 				'error' => [ 
