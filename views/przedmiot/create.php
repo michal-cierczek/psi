@@ -18,10 +18,10 @@ $this->params['breadcrumbs'][] = 'Update';
 		'encodeLabels' => false,
 		'heading' => false,
 		'items' => [
-				['label' => 'Informacje podstawowe', 'url' => Url::to(['update', 'id' => $id, 'step'=>'1'])],
-				
-				['label' => 'Opiekun', 'url' => Url::to(['update', 'id' => $id, 'step'=>'10'])],
-				
+				['label' => 'Informacje podstawowe', 'url' => Url::to(['update', 'id' => $id, 'step'=>'12'])],
+				['label' => 'Powiązane KEK', 'url' => Url::to(['update', 'id' => $id, 'step'=>'13'])],
+				['label' => 'Opiekun przedmiotu', 'url' => Url::to(['update', 'id' => $id, 'step'=>'14'])],
+							
 		],
 ]); ?>
 </div>
