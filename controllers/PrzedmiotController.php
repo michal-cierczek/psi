@@ -99,15 +99,46 @@ class PrzedmiotController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Przedmiot();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id, 'kierunekStudiow_id' => $model->kierunekStudiow_id, 'user_id' => $model->user_id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
+        $forModal = null;
+    	switch($step){
+    		case '12':
+    				$model = new Przedmiot();
+    			break;
+    	}
+    	
+    	if ($model->load(Yii::$app->request->post()) && $model->save()) {
+    		if(step!=11)
+    		{
+    			return $this->redirect(['update', 'id' => $id, 'step'=>$step]);
+    			$step++;
+    		}
+    		else 
+    		{
+    			return $this->redirect(['index']);
+    		}
+    		
+    	}else{
+    		if($step==4 && $forModal->load(Yii::$app->request->post()) && $forModal->save()){
+    			$forModal = new CelKP();
+    		}
+    		elseif($step==2 && $forModal->load(Yii::$app->request->post()) && $forModal->save()){
+    			$forModal = new Kurs();
+    		}
+    		elseif($step==5 && $forModal->load(Yii::$app->request->post()) && $forModal->save()){
+    			$forModal = new Pek();
+    		}
+    		elseif($step==6 && $forModal->load(Yii::$app->request->post()) && $forModal->save()){
+    			$forModal = new TresciProgramowe();
+    		}
+    		elseif($step==7 && $forModal->load(Yii::$app->request->post()) && $forModal->save()){
+    			$forModal = new NarzedziaDydaktyczne();
+    		}
+    		elseif($step==8 && $forModal->load(Yii::$app->request->post()) && $forModal->save()){
+    			$forModal = new Ocena();
+    		}
+    	}
+    	return $this->render('update', ['model' => $model, 'id' => $id, 'step' => $step, 'forModal' => $forModal]);      
+   
     }
 
     /**
@@ -171,8 +202,16 @@ class PrzedmiotController extends Controller
     	}
     	
     	if ($step != 2 && $step != 4 && $step != 5 && $step != 6 && $step != 7 && $step != 8 && $model->load(Yii::$app->request->post()) && $model->save()) {
-    		$step++;
-    		return $this->redirect(['update', 'id' => $id, 'step'=>$step]);
+    		if(step!=11)
+    		{
+    			return $this->redirect(['update', 'id' => $id, 'step'=>$step]);
+    			$step++;
+    		}
+    		else 
+    		{
+    			return $this->redirect(['index']);
+    		}
+    		
     	}else{
     		if($step==4 && $forModal->load(Yii::$app->request->post()) && $forModal->save()){
     			$forModal = new CelKP();
