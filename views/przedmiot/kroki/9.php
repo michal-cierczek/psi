@@ -13,7 +13,7 @@ use dosamigos\tinymce\TinyMce;
 
     <?php $form = ActiveForm::begin(); ?>
 
-<?= $form->field($model, 'podstawowa') -> widget(TinyMce::classname(), [
+<?= $form->field($model, 'litPodstawowa') -> widget(TinyMce::classname(), [
     	'options' => ['rows' => 10],
     	'language' => 'pl',
     	'clientOptions' => [
@@ -26,7 +26,7 @@ use dosamigos\tinymce\TinyMce;
     ]
 ]) ?>
 
-<?= $form->field($model, 'uzupelniajaca') -> widget(TinyMce::classname(), [
+<?= $form->field($model, 'litUzupelniajaca') -> widget(TinyMce::classname(), [
     	'options' => ['rows' => 10],
     	'language' => 'pl',
     	'clientOptions' => [

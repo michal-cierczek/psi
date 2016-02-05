@@ -26,15 +26,19 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            //'id',
             'kodKursu',
-            //'wymaganie',
             'nazwaPolska',
             'nazwaAngielska',
-            'nazwaKierunku',
-        	'cykl',
-            // 'published',
-            // 'user_id',
+        	[ // kierunek
+        		'attribute' => 'kierunekStudiow_id',
+        		'value' => 'kierunekStudiow.opis',
+        		'label' => 'Nazwa kierunku'
+        	],
+        	[ // cykl
+        		'attribute' => 'kierunekStudiow_id',
+        		'value' => 'kierunekStudiow.cykl',
+        		'label' => 'Cykl'
+        	],
             ['class' => 'yii\grid\ActionColumn',
             		'template'=>'{view} {update} {delete}',
             		'buttons'=>

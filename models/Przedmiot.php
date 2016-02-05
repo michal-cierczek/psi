@@ -15,7 +15,8 @@ use Yii;
  * @property integer $kierunekStudiow_id
  * @property integer $published
  * @property integer $user_id
- * @property string $literatura
+ * @property string $litPodstawowa
+ * @property string $litUzupelniajaca
  *
  * @property CelKP[] $celKPs
  * @property Kurs[] $kurs
@@ -44,7 +45,7 @@ class Przedmiot extends \yii\db\ActiveRecord
         return [
             [['kodKursu', 'wymaganie', 'nazwaPolska', 'nazwaAngielska', 'kierunekStudiow_id', 'published', 'user_id'], 'required'],
             [['kierunekStudiow_id', 'published', 'user_id'], 'integer'],
-            [['kodKursu', 'wymaganie', 'literatura'], 'string'],
+            [['kodKursu', 'wymaganie', 'litPodstawowa', 'litUzupelniajaca'], 'string'],
             [['nazwaPolska', 'nazwaAngielska'], 'string', 'max' => 100],
             [['kodKursu'], 'unique']
         ];
@@ -65,7 +66,8 @@ class Przedmiot extends \yii\db\ActiveRecord
             'published' => 'Opublikownany',
             'user_id' => 'User ID',
         	'grupaKursow' => 'Grupa kursów',
-        	'literatura' => 'Literatura'
+        	'litPodstawowa' => 'Literatura podstawowa',
+        	'litUzupelniajaca' => 'Literatura uzupełniająca'
         ];
     }
 
@@ -121,11 +123,9 @@ class Przedmiot extends \yii\db\ActiveRecord
     public function getNazwaKierunku(){
     	return $this->kierunekStudiow ? $this->kierunekStudiow->opis : null;
     }
-    public function getCykl(){
-    	return $this->kierunekStudiow->cykl->data;
-    }
+    
     public function getNazwaSpec(){
-    	return $this->kierunekStudiow ?  $this->kierunekStudiow->specjalnosc : '-';    
+    	return $this->kierunekStudiow ?  $this->kierunekStudiow->specjalnosc : null;    
     }
     public function getAutorName()
     {

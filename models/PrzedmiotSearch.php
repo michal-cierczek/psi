@@ -18,8 +18,8 @@ class PrzedmiotSearch extends Przedmiot
     public function rules()
     {
         return [
-            [['id', 'kierunekStudiow_id', 'published', 'user_id'], 'integer'],
-            [['kodKursu', 'wymaganie', 'nazwaPolska', 'nazwaAngielska'], 'safe'],
+            [['id', 'published', 'user_id'], 'integer'],
+            [['kodKursu', 'wymaganie', 'nazwaPolska', 'nazwaAngielska', 'kierunekStudiow_id'], 'safe'],
         ];
     }
 
@@ -55,6 +55,10 @@ class PrzedmiotSearch extends Przedmiot
             return $dataProvider;
         }
 
+        
+        $query->joinWith('kierunekStudiow');
+        
+        
         $query->andFilterWhere([
             'id' => $this->id,
             'kierunekStudiow_id' => $this->kierunekStudiow_id,
@@ -65,7 +69,9 @@ class PrzedmiotSearch extends Przedmiot
         $query->andFilterWhere(['like', 'kodKursu', $this->kodKursu])
             ->andFilterWhere(['like', 'wymaganie', $this->wymaganie])
             ->andFilterWhere(['like', 'nazwaPolska', $this->nazwaPolska])
-            ->andFilterWhere(['like', 'nazwaAngielska', $this->nazwaAngielska]);
+            ->andFilterWhere(['like', 'nazwaAngielska', $this->nazwaAngielska])
+            ->andFilterWhere(['like', 'kierunekStudiow.opis', $this->kierunekStudiow_id])
+            ->andFilterWhere(['like', 'kierunekStudiow.cykl', $this->kierunekStudiow_id]);
 
         return $dataProvider;
     }
