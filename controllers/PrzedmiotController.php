@@ -19,6 +19,10 @@ use app\models\NarzedziaDydaktyczne;
 use app\models\NarzedziaDydaktyczneSearch;
 use app\models\TresciProgramowe;
 use app\models\TresciProgramoweSearch;
+use yii\filters\AccessControl;
+use yii\data\SqlDataProvider;
+use app\models\Ocena;
+use app\models\OcenaSearch;
 
 /**
  * PrzedmiotController implements the CRUD actions for Przedmiot model.
@@ -34,6 +38,20 @@ class PrzedmiotController extends Controller
                     'delete' => ['post'],
                 ],
             ],
+        		'access' => [
+        				'class' => AccessControl::className(),
+        				'only' => ['index'],
+        				'rules' => [
+        						[
+        								'allow' => true,
+        								'actions' => ['index'],
+        								'roles' => ['@'],
+        						],
+        				],
+        				'denyCallback' => function ($rule, $action) {
+        				throw new \Exception('You are not allowed to access this page');
+        				}
+        				],
         ];
     }
 
@@ -45,11 +63,25 @@ class PrzedmiotController extends Controller
     {
         $searchModel = new PrzedmiotSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+// 		$dataProvider = new SqlDataProvider([
+// 		    'sql' => 'SELECT * FROM przedmiot WHERE user_id=' . Yii::$app->user->id,
+		   
+// 		]);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+    }
+    public function actionIndex2()
+    {
+    	$searchModel = new PrzedmiotSearch();
+    	$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+    
+    	return $this->render('index2', [
+    			'searchModel' => $searchModel,
+    			'dataProvider' => $dataProvider,
+    	]);
     }
 
     /**
@@ -129,6 +161,11 @@ class PrzedmiotController extends Controller
     			$searchModel = new NarzedziaDydaktyczneSearch();
     			$model = $searchModel->search(['przedmiot_id'=> $id]);
     				break;
+    		case '8': // ocena osiagniecie pek
+    			$forModal = new Ocena();
+    			$searchModel = new OcenaSearch();
+    			$model = $searchModel->search(['przedmiot_id'=> $id]);
+    			break;
     		case '9': // literatura
     			if(!($model = Literatura::find() -> where(['przedmiot_id' => $id]) -> one()))
     				$model = new Literatura();
@@ -139,7 +176,7 @@ class PrzedmiotController extends Controller
     			break;
     	}
     	
-    	if ($step != 2 && $step != 4 && $step != 5 && $step != 6 && $step != 7 && $model->load(Yii::$app->request->post()) && $model->save()) {
+    	if ($step != 2 && $step != 4 && $step != 5 && $step != 6 && $step != 7 && $step != 8 && $model->load(Yii::$app->request->post()) && $model->save()) {
     		$step++;
     		return $this->redirect(['update', 'id' => $id, 'step'=>$step]);
     	}else{
@@ -157,6 +194,9 @@ class PrzedmiotController extends Controller
     		}
     		elseif($step==7 && $forModal->load(Yii::$app->request->post()) && $forModal->save()){
     			$forModal = new NarzedziaDydaktyczne();
+    		}
+    		elseif($step==8 && $forModal->load(Yii::$app->request->post()) && $forModal->save()){
+    			$forModal = new Ocena();
     		}
     	}
     	return $this->render('update', ['model' => $model, 'id' => $id, 'step' => $step, 'forModal' => $forModal]);      
