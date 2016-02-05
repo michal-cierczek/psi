@@ -35,8 +35,8 @@ $this->params['breadcrumbs'][] = $this->title;
         		'label' => 'Nazwa kierunku'
         	],
         	[ // cykl
-        		'attribute' => 'cykl_id',
-        		'value' => 'cykl.data',
+        		'attribute' => 'kierunekStudiow_id',
+        		'value' => 'kierunekStudiow.cykl',
         		'label' => 'Cykl'
         	],
             ['class' => 'yii\grid\ActionColumn',

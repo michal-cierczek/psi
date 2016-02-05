@@ -121,9 +121,7 @@ class Przedmiot extends \yii\db\ActiveRecord
     public function getNazwaKierunku(){
     	return $this->kierunekStudiow ? $this->kierunekStudiow->opis : null;
     }
-    public function getCykl(){
-    	return $this->kierunekStudiow->cykl;
-    }
+    
     public function getNazwaSpec(){
     	return $this->kierunekStudiow ?  $this->kierunekStudiow->specjalnosc : null;    
     }

@@ -70,7 +70,8 @@ class PrzedmiotSearch extends Przedmiot
             ->andFilterWhere(['like', 'wymaganie', $this->wymaganie])
             ->andFilterWhere(['like', 'nazwaPolska', $this->nazwaPolska])
             ->andFilterWhere(['like', 'nazwaAngielska', $this->nazwaAngielska])
-            ->andFilterWhere(['like', 'kierunekStudiow.opis', $this->kierunekStudiow_id]);
+            ->andFilterWhere(['like', 'kierunekStudiow.opis', $this->kierunekStudiow_id])
+            ->andFilterWhere(['like', 'kierunekStudiow.cykl', $this->kierunekStudiow_id]);
 
         return $dataProvider;
     }
