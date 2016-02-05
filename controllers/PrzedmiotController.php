@@ -7,7 +7,6 @@ use app\models\Przedmiot;
 use app\models\PrzedmiotSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 use app\models\Literatura;
 use app\models\CelKPSearch;
 use app\models\KursSearch;
@@ -21,7 +20,7 @@ use app\models\TresciProgramowe;
 use app\models\TresciProgramoweSearch;
 use yii\filters\AccessControl;
 use yii\data\SqlDataProvider;
-
+use yii\helpers\Url;
 use app\models\Ocena;
 use app\models\OcenaSearch;
 
@@ -33,12 +32,6 @@ class PrzedmiotController extends Controller
     public function behaviors()
     {
         return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
-                ],
-            ],
         		'access' => [
         				'class' => AccessControl::className(),
         				'only' => ['index'],
@@ -50,8 +43,8 @@ class PrzedmiotController extends Controller
         						],
         				],
         				'denyCallback' => function ($rule, $action) {
-        				throw new \Exception('You are not allowed to access this page');
-        				}
+						return $this->redirect(Url::to(['/user/login']));
+						}
         				],
         ];
     }
@@ -131,7 +124,7 @@ class PrzedmiotController extends Controller
     	$forModal = null;
     	switch($step){
     		case '1':
-    			if(!($model = Przedmiot::find()->where(['id' => $id, 'user_id' => Yii::$app->user->id])->one()))
+    			if(!($model = Przedmiot::find()->where(['id' => $id])->one()))
     				$model = new Przedmiot();
     			break;
     		case '2':
@@ -169,8 +162,8 @@ class PrzedmiotController extends Controller
     			$model = $searchModel->search(['przedmiot_id'=> $id]);
     			break;
     		case '9': // literatura
-    			if(!($model = Literatura::find() -> where(['przedmiot_id' => $id]) -> one()))
-    				$model = new Literatura();
+    			if(!($model = Przedmiot::find() -> where(['id' => $id]) -> one()))
+    				$model = new Przedmiot();
     			break;
     		case '10': // opiekun
     			if(!($model = Przedmiot::find() -> where(['id' => $id]) -> one()))
@@ -212,9 +205,9 @@ class PrzedmiotController extends Controller
      * @param integer $user_id
      * @return mixed
      */
-    public function actionDelete($id, $kierunekStudiow_id, $user_id)
+    public function actionDelete($id)
     {
-        $this->findModel($id, $kierunekStudiow_id, $user_id)->delete();
+        $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
@@ -228,9 +221,9 @@ class PrzedmiotController extends Controller
      * @return Przedmiot the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id, $kierunekStudiow_id, $user_id)
+    protected function findModel($id)
     {
-        if (($model = Przedmiot::findOne(['id' => $id, 'kierunekStudiow_id' => $kierunekStudiow_id, 'user_id' => $user_id])) !== null) {
+        if (($model = Przedmiot::findOne(['id' => $id])) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
