@@ -14,17 +14,6 @@ use yii\filters\VerbFilter;
  */
 class KekController extends Controller
 {
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
-                ],
-            ],
-        ];
-    }
 
     /**
      * Lists all Kek models.
@@ -55,10 +44,10 @@ class KekController extends Controller
      * @param integer $Cykl_id
      * @return mixed
      */
-    public function actionView($id, $Cykl_id)
+    public function actionView($id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id, $Cykl_id),
+            'model' => $this->findModel($id),
         ]);
     }
 
@@ -87,12 +76,12 @@ class KekController extends Controller
      * @param integer $Cykl_id
      * @return mixed
      */
-    public function actionUpdate($id, $Cykl_id)
+    public function actionUpdate($id)
     {
-        $model = $this->findModel($id, $Cykl_id);
+        $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id, 'Cykl_id' => $model->Cykl_id]);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -107,11 +96,11 @@ class KekController extends Controller
      * @param integer $Cykl_id
      * @return mixed
      */
-    public function actionDelete($id, $Cykl_id)
+    public function actionDelete($id, $kid)
     {
-        $this->findModel($id, $Cykl_id)->delete();
+        $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['kierunek/update', 'id' => $kid,]);
     }
 
     /**
@@ -122,9 +111,9 @@ class KekController extends Controller
      * @return Kek the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id, $Cykl_id)
+    protected function findModel($id)
     {
-        if (($model = Kek::findOne(['id' => $id, 'Cykl_id' => $Cykl_id])) !== null) {
+        if (($model = Kek::findOne(['id' => $id])) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

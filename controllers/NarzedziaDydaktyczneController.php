@@ -14,17 +14,7 @@ use yii\filters\VerbFilter;
  */
 class NarzedziaDydaktyczneController extends Controller
 {
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
-                ],
-            ],
-        ];
-    }
+    
 
     /**
      * Lists all NarzedziaDydaktyczne models.
@@ -96,11 +86,11 @@ class NarzedziaDydaktyczneController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
+    public function actionDelete($id, $kid)
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['przedmiot/update', 'id' => $kid, 'step' => 7]);
     }
 
     /**

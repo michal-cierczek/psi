@@ -14,17 +14,6 @@ use yii\filters\VerbFilter;
  */
 class KursController extends Controller
 {
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
-                ],
-            ],
-        ];
-    }
 
     /**
      * Lists all Kurs models.
@@ -96,11 +85,11 @@ class KursController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
+    public function actionDelete($id, $kid)
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['przedmiot/update', 'id' => $kid, 'step' => 2]);
     }
 
     /**
