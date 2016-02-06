@@ -7,7 +7,6 @@ use app\models\Przedmiot;
 use app\models\PrzedmiotSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 use app\models\CelKPSearch;
 use app\models\KursSearch;
 use app\models\CelKP;

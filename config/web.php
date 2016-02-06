@@ -49,6 +49,13 @@ $config = [
 								] 
 						] 
 				],
+				'response' => [
+						'formatters' => [
+								'pdf' => [
+										'class' => 'robregonm\pdf\PdfResponseFormatter',
+								],
+						]
+				],
 				'db' => require (__DIR__ . '/db.php') 
 		],
 		'params' => $params 
