@@ -45,7 +45,14 @@ $this->params['breadcrumbs'][] = $this->title;
 	        				$icon = '<span class="glyphicon glyphicon-pencil"></span>';
 	        				$label = 'Edytuj';
 	        				$url = Url::to(["update", 'id' =>$model -> id, 'step' => '1']);
-							return Html::a($icon, $url, ['title' => $label]);
+							return !(Yii::$app->user->isGuest) ?  Html::a($icon, $url, ['title' => $label]):'';
+						},
+						'delete' => function($url, $model, $key)
+						{
+							$icon = '<span class="glyphicon glyphicon-trash"></span>';
+							$label = 'Usun';
+							$url = Url::to(["delete", 'id' =>$model -> id, 'step' => '1']);
+							return !(Yii::$app->user->isGuest) ?  Html::a($icon, $url, ['title' => $label]):'';
 						},
 						'view' => function($url, $model, $key)
 						{

@@ -31,17 +31,17 @@ class PrzedmiotController extends Controller
         return [
         		'access' => [
         				'class' => AccessControl::className(),
-        				'only' => ['index'],
+        				'only' => ['update'],
         				'rules' => [
         						[
         								'allow' => true,
-        								'actions' => ['index'],
+        								'actions' => ['update'],
         								'roles' => ['@'],
         						],
         				],
         				'denyCallback' => function ($rule, $action) {
-						return $this->redirect(Url::to(['/user/login']));
-						}
+        throw new \Exception('You are not allowed to access this page');
+    }
         				],
         ];
     }

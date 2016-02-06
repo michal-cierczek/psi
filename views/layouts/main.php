@@ -38,7 +38,7 @@ AppAsset::register($this);
         'items' => [
         		['label' => 'Strona główna', 'url' => ['/site/index']],
         		Yii::$app->user->isGuest ?
-        			['label' => 'Przeglądaj karty przedmiotu', 'url' => ['/przedmiot/index2']] :
+        			['label' => 'Przeglądaj karty przedmiotu', 'url' => ['/przedmiot/index']] :
         			[
         			'label' => 'Karta przedmiotu', 
         			'url' => ['/przedmiot/index'],
