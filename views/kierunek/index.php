@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
             				$icon = '<span class="glyphicon glyphicon-pencil"></span>';
             				$label = 'Edytuj';
             				$url = Url::to(["update", 'id' =>$model -> id]);
-            				return Html::a($icon, $url, ['title' => $label]);
+            				return Yii::$app->user->identity->groupId=='admin'? Html::a($icon, $url, ['title' => $label]):'';
             			},
             			
             			'view' => function($url, $model, $key)

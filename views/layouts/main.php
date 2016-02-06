@@ -38,18 +38,22 @@ AppAsset::register($this);
         'items' => [
         		['label' => 'Strona główna', 'url' => ['/site/index']],
         		Yii::$app->user->isGuest ?
-        			['label' => 'Przeglądaj karty przedmiotu', 'url' => ['/przedmiot/index2']] :
+        			['label' => 'Przeglądaj karty przedmiotu', 'url' => ['/przedmiot/index']] :
         			[
-        			'label' => 'Karta przedmiotu', 
+        			'label' => 'Zarządzaj kartami przedmiotu', 
         			'url' => ['/przedmiot/index'],
         			],
         		Yii::$app->user->isGuest ?
-        		['label' => 'Kierunkowe efekty kształcenia', 'url' => ['/kierunek/index']] :
+        		['label' => false] :
         		[
         				'label' => 'Kierunkowe efekty kształcenia',
         				'url' => ['/kierunek/index'],
         		],
+        		Yii::$app->user->isGuest ?
+        		['label' => false] :
 	            ['label' => 'O programie', 'url' => ['/site/about']],
+        		Yii::$app->user->isGuest ?
+        		['label' => false] :
 	            ['label' => 'Kontakt', 'url' => ['/site/contact']],
 	            Yii::$app->user->isGuest ?
 	                ['label' => 'Zaloguj', 'url' => ['/user/login']] :
@@ -58,11 +62,10 @@ AppAsset::register($this);
 	                    'url' => ['/user/logout'],
 	                    'linkOptions' => ['data-method' => 'post']
 	                ],
-        		
-        	Yii::$app->user->isGuest ?
-        		['label' => 'Rejestracja', 'url' => ['/user/register']] :
+        	(Yii::$app->user->isGuest||!(Yii::$app->user->identity->groupId=='admin')) ?
+        		['label' => false] :
         		[
-        				'label' => ''
+        				'label' => 'Rejestracja', 'url' => ['/user/register']
         		],
         		
         ],

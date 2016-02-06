@@ -20,7 +20,6 @@ use yii\data\SqlDataProvider;
 use kartik\mpdf\Pdf;
 use app\models\Ocena;
 use app\models\OcenaSearch;
-
 /**
  * PrzedmiotController implements the CRUD actions for Przedmiot model.
  */
