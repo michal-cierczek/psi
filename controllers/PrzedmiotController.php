@@ -1,7 +1,5 @@
 <?php
-
 namespace app\controllers;
-
 use Yii;
 use app\models\Przedmiot;
 use app\models\PrzedmiotSearch;
@@ -20,7 +18,6 @@ use app\models\TresciProgramoweSearch;
 use yii\filters\AccessControl;
 use yii\data\SqlDataProvider;
 use kartik\mpdf\Pdf;
-use yii\helpers\Url;
 use app\models\Ocena;
 use app\models\OcenaSearch;
 
@@ -34,21 +31,25 @@ class PrzedmiotController extends Controller
         return [
         		'access' => [
         				'class' => AccessControl::className(),
-        				'only' => ['index'],
+        				'only' => ['update','create','delete'],
+        				'ruleConfig' => [
+        						'class' => 'app\components\AccessRule' // OUR OWN RULE
+        				],
         				'rules' => [
         						[
         								'allow' => true,
-        								'actions' => ['index'],
+        								'actions' => ['update'],
         								'roles' => ['@'],
         						],
+        						[
+		        						'allow' => true,
+		        						'actions' => ['create','delete'],
+		        						'roles' => ['admin'],
+        						],
         				],
-        				'denyCallback' => function ($rule, $action) {
-						return $this->redirect(Url::to(['/user/login']));
-						}
         				],
         ];
     }
-
     /**
      * Lists all Przedmiot models.
      * @return mixed
@@ -61,7 +62,6 @@ class PrzedmiotController extends Controller
 // 		    'sql' => 'SELECT * FROM przedmiot WHERE user_id=' . Yii::$app->user->id,
 		   
 // 		]);
-
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -78,7 +78,6 @@ class PrzedmiotController extends Controller
     	]);
     }
    
-
     /**
      * Displays a single Przedmiot model.
      * @param integer $id
@@ -86,9 +85,18 @@ class PrzedmiotController extends Controller
      * @param integer $user_id
      * @return mixed
      */
-    public function actionView($nazwaPolska)
+    public function actionView($id, $kodKursu, $wymaganie, $nazwaPolska, $nazwaAngielska, $kierunekStudiow_id,
+    		$published, $user_id, $grupaKursow, $litPodstawowa, $litUzupelniajaca, $kierunekNazwa, $kierunekSpec, $kierunekStopien)
     {
-    $content = $this->renderPartial('viewPdf', ['nazwaPolska' => $nazwaPolska]);
+    $kursy = Kurs::find()->where(['przedmiot_id'=>$id])->AsArray()->all();
+    $cele = CelKP::find()->where(['przedmiot_id'=>$id])->AsArray()->all();
+    
+    $content = $this->renderPartial('viewPdf', ['id' => $id, 'kodKursu' => $kodKursu, 'wymaganie' => $wymaganie,
+    		 'nazwaPolska' => $nazwaPolska, 'nazwaAngielska' => $nazwaAngielska, 'kierunekStudiow_id' => $kierunekStudiow_id,
+    		'published' => $published, 'user_id' => $user_id, 'grupaKursow' => $grupaKursow, 'litPodstawowa' => $litPodstawowa,
+    		'litUzupelniajaca' => $litUzupelniajaca, 'kierunekNazwa' => $kierunekNazwa, 'kierunekSpec' => $kierunekSpec,
+    		'kierunekStopien' => $kierunekStopien, 'kursy' => $kursy
+    ]);
  
     // setup kartik\mpdf\Pdf component
     $pdf = new Pdf([
@@ -119,7 +127,6 @@ class PrzedmiotController extends Controller
     // return the pdf output as per the destination setting
     return $pdf->render(); 
     }
-
     /**
      * Creates a new Przedmiot model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -168,7 +175,6 @@ class PrzedmiotController extends Controller
     	return $this->render('update', ['model' => $model, 'id' => $id, 'step' => $step, 'forModal' => $forModal]);      
    
     }
-
     /**
      * Updates an existing Przedmiot model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -262,7 +268,6 @@ class PrzedmiotController extends Controller
     	}
     	return $this->render('update', ['model' => $model, 'id' => $id, 'step' => $step, 'forModal' => $forModal]);      
     }
-
     /**
      * Deletes an existing Przedmiot model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
@@ -274,10 +279,8 @@ class PrzedmiotController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-
         return $this->redirect(['index']);
     }
-
     /**
      * Finds the Przedmiot model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
