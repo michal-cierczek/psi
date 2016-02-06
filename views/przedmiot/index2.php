@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
@@ -10,29 +11,36 @@ use yii\grid\GridView;
 $this->title = 'Przedmioty';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="przedmiot-index2">
+<div class="przedmiot-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 	
 	
+    <p>
+        <?= Html::a('Create Przedmiot', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            //'id',
             'kodKursu',
-            //'wymaganie',
             'nazwaPolska',
             'nazwaAngielska',
-            'nazwaKierunku',
-        	'cykl',
-            // 'published',
-            // 'user_id',
+        	[ // kierunek
+        		'attribute' => 'kierunekStudiow_id',
+        		'value' => 'kierunekStudiow.opis',
+        		'label' => 'Nazwa kierunku'
+        	],
+        	[ // cykl
+        		'attribute' => 'kierunekStudiow_id',
+        		'value' => 'kierunekStudiow.cykl',
+        		'label' => 'Cykl'
+        	],
             ['class' => 'yii\grid\ActionColumn',
             		'template'=>'{view}',
-            		
     		],
         ],
     ]); ?>

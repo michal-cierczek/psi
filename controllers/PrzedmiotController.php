@@ -21,7 +21,6 @@ use yii\filters\AccessControl;
 use yii\data\SqlDataProvider;
 use yii\helpers\Url;
 use kartik\mpdf\Pdf;
-use yii\helpers\Url;
 use app\models\Ocena;
 use app\models\OcenaSearch;
 
@@ -30,25 +29,6 @@ use app\models\OcenaSearch;
  */
 class PrzedmiotController extends Controller
 {
-    public function behaviors()
-    {
-        return [
-        		'access' => [
-        				'class' => AccessControl::className(),
-        				'only' => ['index'],
-        				'rules' => [
-        						[
-        								'allow' => true,
-        								'actions' => ['index'],
-        								'roles' => ['@'],
-        						],
-        				],
-        				'denyCallback' => function ($rule, $action) {
-						return $this->redirect(Url::to(['/user/login']));
-						}
-        				],
-        ];
-    }
 
     /**
      * Lists all Przedmiot models.
@@ -56,6 +36,7 @@ class PrzedmiotController extends Controller
      */
     public function actionIndex()
     {
+    	Yii::trace(Yii::$app->user->can('update'));
         $searchModel = new PrzedmiotSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 // 		$dataProvider = new SqlDataProvider([
@@ -87,11 +68,41 @@ class PrzedmiotController extends Controller
      * @param integer $user_id
      * @return mixed
      */
-    public function actionView($id, $kierunekStudiow_id, $user_id)
+    public function actionView($nazwaPolska)
     {
         return $this->render('view', [
             'model' => $this->findModel($id, $kierunekStudiow_id, $user_id),
         ]);
+    $content = $this->renderPartial('viewPdf', ['nazwaPolska' => $nazwaPolska]);
+ 
+    // setup kartik\mpdf\Pdf component
+    $pdf = new Pdf([
+        // set to use core fonts only
+        'mode' => Pdf::MODE_CORE, 
+        // A4 paper format
+        'format' => Pdf::FORMAT_A4, 
+        // portrait orientation
+        'orientation' => Pdf::ORIENT_PORTRAIT, 
+        // stream to browser inline
+        'destination' => Pdf::DEST_BROWSER, 
+        // your html content input
+        'content' => $content,  
+        // format content from your own css file if needed or use the
+        // enhanced bootstrap css built by Krajee for mPDF formatting 
+        'cssFile' => '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css',
+        // any css to be embedded if required
+        'cssInline' => '.kv-heading-1{font-size:18px}', 
+         // set mPDF properties on the fly
+        'options' => ['title' => 'Krajee Report Title'],
+         // call mPDF methods on the fly
+        'methods' => [ 
+            'SetHeader'=>['Krajee Report Header'], 
+            'SetFooter'=>['{PAGENO}'],
+        ]
+    ]);
+ 
+    // return the pdf output as per the destination setting
+    return $pdf->render(); 
     }
 
     /**

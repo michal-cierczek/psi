@@ -49,6 +49,38 @@ $this->params['breadcrumbs'][] = $this->title;
 	        				$label = 'Edytuj';
 	        				$url = Url::to(["update", 'id' =>$model -> id, 'step' => '1']);
 							return Html::a($icon, $url, ['title' => $label]);
+							
+						},
+						'view' => function($url, $model, $key)
+						{
+							$icon = '<span class="glyphicon glyphicon-pencil"></span>';
+							$label = 'Pokaz';
+							$url = Url::to(["view", 
+									'id' => $model -> id,
+									'nazwaPolska' => $model -> nazwaPolska,
+									'nazwaAngielska' => $model -> nazwaAnglielska
+
+							]);
+							return Html::a($icon, $url, ['title' => $label]);
+						},
+						'view' => function($url, $model, $key)
+						{
+							$icon = '<span class="glyphicon glyphicon-pencil"></span>';
+							$label = 'Pokaz';
+							$url = Url::to(["view", 
+									'id' => $model -> id,
+									'kodKursu' => $model -> kodKursu,
+									'wymaganie' => $model -> wymaganie,
+									'nazwaPolska' => $model -> nazwaPolska,
+									'nazwaAngielska' => $model -> nazwaAngielska,
+									'kierunekStudiow_id' => $model -> kierunekStudiow_id,
+									'published' => $model -> published,
+									'user_id' => $model -> user_id,
+									'grupaKursow' => $model -> grupaKursow,
+									'litPodstawowa' => $model -> litPodstawowa,
+									'litUzupelniajaca' => $model -> litUzupelniajaca
+							]);
+							return Html::a($icon, $url, ['title' => $label]);
 						}
     				]
     		],
