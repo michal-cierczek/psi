@@ -31,17 +31,22 @@ class PrzedmiotController extends Controller
         return [
         		'access' => [
         				'class' => AccessControl::className(),
-        				'only' => ['update'],
+        				'only' => ['update','create','delete'],
+        				'ruleConfig' => [
+        						'class' => 'app\components\AccessRule' // OUR OWN RULE
+        				],
         				'rules' => [
         						[
         								'allow' => true,
         								'actions' => ['update'],
         								'roles' => ['@'],
         						],
+        						[
+		        						'allow' => true,
+		        						'actions' => ['create','delete'],
+		        						'roles' => ['admin'],
+        						],
         				],
-        				'denyCallback' => function ($rule, $action) {
-        throw new \Exception('You are not allowed to access this page');
-    }
         				],
         ];
     }
