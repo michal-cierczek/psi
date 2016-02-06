@@ -7,11 +7,10 @@ use app\models\Kierunek;
 use app\models\KierunekSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 use app\models\Kek;
 use app\models\KekSearch;
 use yii\filters\AccessControl;
-
+use yii\helpers\Url;
 /**
  * KierunekController implements the CRUD actions for Kierunek model.
  */
@@ -20,12 +19,6 @@ class KierunekController extends Controller
     public function behaviors()
     {
         return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
-                ],
-            ],
         		'access' => [
         				'class' => AccessControl::className(),
         				'only' => ['index'],
@@ -37,8 +30,8 @@ class KierunekController extends Controller
         						],
         				],
         				'denyCallback' => function ($rule, $action) {
-        				throw new \Exception('You are not allowed to access this page');
-        				}
+						return $this->redirect(Url::to(['/user/login']));
+						}
         			],
         ];
     }

@@ -19,12 +19,15 @@ class UserController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout'],
+                'only' => ['register'],
+            	'ruleConfig' => [
+            		'class' => 'app\components\AccessRule' // OUR OWN RULE
+            	],
                 'rules' => [
                     [
-                        'actions' => ['logout'],
+                        'actions' => ['register'],
                         'allow' => true,
-                        'roles' => ['@'],
+                        'roles' => ['1'],
                     ],
                 ],
             ],
@@ -64,9 +67,9 @@ class UserController extends Controller
     
     public function actionRegister()
     {
-    	if (!\Yii::$app->user->isGuest) {
-    		return $this->goHome();	 
-    	}
+//     	if (!\Yii::$app->user->isGuest) {
+//     		return $this->goHome();	 
+//     	}
     	
     	$model = new RegisterForm();
     	if(Yii::$app->request->isAjax && $model->load(Yii::$app->request->post()))

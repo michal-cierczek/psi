@@ -8,6 +8,10 @@ $config = [
 				'log' 
 		],
 		'components' => [ 
+				'authManager' => [
+						'class' => 'yii\rbac\PhpManager',
+						'defaultRoles' => ['admin', 'author'],
+				],
 				'urlManager' => [ 
 						'enablePrettyUrl' => true,
 						'showScriptName' => false,
