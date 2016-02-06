@@ -8,7 +8,6 @@ use app\models\PrzedmiotSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use app\models\Literatura;
 use app\models\CelKPSearch;
 use app\models\KursSearch;
 use app\models\CelKP;
@@ -21,7 +20,8 @@ use app\models\TresciProgramowe;
 use app\models\TresciProgramoweSearch;
 use yii\filters\AccessControl;
 use yii\data\SqlDataProvider;
-
+use kartik\mpdf\Pdf;
+use yii\helpers\Url;
 use app\models\Ocena;
 use app\models\OcenaSearch;
 
@@ -33,12 +33,6 @@ class PrzedmiotController extends Controller
     public function behaviors()
     {
         return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
-                ],
-            ],
         		'access' => [
         				'class' => AccessControl::className(),
         				'only' => ['index'],
@@ -50,8 +44,8 @@ class PrzedmiotController extends Controller
         						],
         				],
         				'denyCallback' => function ($rule, $action) {
-        				throw new \Exception('You are not allowed to access this page');
-        				}
+						return $this->redirect(Url::to(['/user/login']));
+						}
         				],
         ];
     }
@@ -93,11 +87,38 @@ class PrzedmiotController extends Controller
      * @param integer $user_id
      * @return mixed
      */
-    public function actionView($id, $kierunekStudiow_id, $user_id)
+    public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id, $kierunekStudiow_id, $user_id),
-        ]);
+    $content = $this->renderPartial('viewPdf');
+ 
+    // setup kartik\mpdf\Pdf component
+    $pdf = new Pdf([
+        // set to use core fonts only
+        'mode' => Pdf::MODE_CORE, 
+        // A4 paper format
+        'format' => Pdf::FORMAT_A4, 
+        // portrait orientation
+        'orientation' => Pdf::ORIENT_PORTRAIT, 
+        // stream to browser inline
+        'destination' => Pdf::DEST_BROWSER, 
+        // your html content input
+        'content' => $content,  
+        // format content from your own css file if needed or use the
+        // enhanced bootstrap css built by Krajee for mPDF formatting 
+        'cssFile' => '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css',
+        // any css to be embedded if required
+        'cssInline' => '.kv-heading-1{font-size:18px}', 
+         // set mPDF properties on the fly
+        'options' => ['title' => 'Krajee Report Title'],
+         // call mPDF methods on the fly
+        'methods' => [ 
+            'SetHeader'=>['Krajee Report Header'], 
+            'SetFooter'=>['{PAGENO}'],
+        ]
+    ]);
+ 
+    // return the pdf output as per the destination setting
+    return $pdf->render(); 
     }
 
     /**
@@ -107,15 +128,46 @@ class PrzedmiotController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Przedmiot();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id, 'kierunekStudiow_id' => $model->kierunekStudiow_id, 'user_id' => $model->user_id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
+        $forModal = null;
+    	switch($step){
+    		case '12':
+    				$model = new Przedmiot();
+    			break;
+    	}
+    	
+    	if ($model->load(Yii::$app->request->post()) && $model->save()) {
+    		if(step!=11)
+    		{
+    			return $this->redirect(['update', 'id' => $id, 'step'=>$step]);
+    			$step++;
+    		}
+    		else 
+    		{
+    			return $this->redirect(['index']);
+    		}
+    		
+    	}else{
+    		if($step==4 && $forModal->load(Yii::$app->request->post()) && $forModal->save()){
+    			$forModal = new CelKP();
+    		}
+    		elseif($step==2 && $forModal->load(Yii::$app->request->post()) && $forModal->save()){
+    			$forModal = new Kurs();
+    		}
+    		elseif($step==5 && $forModal->load(Yii::$app->request->post()) && $forModal->save()){
+    			$forModal = new Pek();
+    		}
+    		elseif($step==6 && $forModal->load(Yii::$app->request->post()) && $forModal->save()){
+    			$forModal = new TresciProgramowe();
+    		}
+    		elseif($step==7 && $forModal->load(Yii::$app->request->post()) && $forModal->save()){
+    			$forModal = new NarzedziaDydaktyczne();
+    		}
+    		elseif($step==8 && $forModal->load(Yii::$app->request->post()) && $forModal->save()){
+    			$forModal = new Ocena();
+    		}
+    	}
+    	return $this->render('update', ['model' => $model, 'id' => $id, 'step' => $step, 'forModal' => $forModal]);      
+   
     }
 
     /**
@@ -179,8 +231,16 @@ class PrzedmiotController extends Controller
     	}
     	
     	if ($step != 2 && $step != 4 && $step != 5 && $step != 6 && $step != 7 && $step != 8 && $model->load(Yii::$app->request->post()) && $model->save()) {
-    		$step++;
-    		return $this->redirect(['update', 'id' => $id, 'step'=>$step]);
+    		if(step!=11)
+    		{
+    			return $this->redirect(['update', 'id' => $id, 'step'=>$step]);
+    			$step++;
+    		}
+    		else 
+    		{
+    			return $this->redirect(['index']);
+    		}
+    		
     	}else{
     		if($step==4 && $forModal->load(Yii::$app->request->post()) && $forModal->save()){
     			$forModal = new CelKP();
@@ -212,9 +272,9 @@ class PrzedmiotController extends Controller
      * @param integer $user_id
      * @return mixed
      */
-    public function actionDelete($id, $kierunekStudiow_id, $user_id)
+    public function actionDelete($id)
     {
-        $this->findModel($id, $kierunekStudiow_id, $user_id)->delete();
+        $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
@@ -228,9 +288,9 @@ class PrzedmiotController extends Controller
      * @return Przedmiot the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id, $kierunekStudiow_id, $user_id)
+    protected function findModel($id)
     {
-        if (($model = Przedmiot::findOne(['id' => $id, 'kierunekStudiow_id' => $kierunekStudiow_id, 'user_id' => $user_id])) !== null) {
+        if (($model = Przedmiot::findOne(['id' => $id])) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
