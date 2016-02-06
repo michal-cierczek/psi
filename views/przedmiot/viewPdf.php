@@ -147,7 +147,7 @@ foreach($tresci as $tresc){ //ĆWICZENIA
 	$html = $html . '<tr>
 						<td>' . $tresc['symbol'] . '</td>
 						<td>' . $tresc['opis'] . '</td>
-						<td>' . $tresc['liczbaGodzin'] . '</td>
+						<td style="text-align:center">' . $tresc['liczbaGodzin'] . '</td>
 					</tr>';
 	$sumaGodzin = $sumaGodzin + $tresc['liczbaGodzin'];
 }
@@ -155,7 +155,7 @@ if($textPrinted){
 	$html = $html . '<tr>
 						<td></td>
 						<td>Suma godzin</td>
-						<td>' . $sumaGodzin . '</td>
+						<td style="text-align:center">' . $sumaGodzin . '</td>
 					</tr>
 				</table><br/>';
 	$textPrinted = false;
@@ -177,7 +177,7 @@ foreach($tresci as $tresc){
 	$html = $html . '<tr>
 						<td>' . $tresc['symbol'] . '</td>
 						<td>' . $tresc['opis'] . '</td>
-						<td>' . $tresc['liczbaGodzin'] . '</td>
+						<td style="text-align:center">' . $tresc['liczbaGodzin'] . '</td>
 					</tr>';
 	$sumaGodzin = $sumaGodzin + $tresc['liczbaGodzin'];
 }
@@ -185,7 +185,7 @@ if($textPrinted){
 	$html = $html . '<tr>
 						<td></td>
 						<td>Suma godzin</td>
-						<td>' . $sumaGodzin . '</td>
+						<td style="text-align:center">' . $sumaGodzin . '</td>
 					</tr>
 				</table><br/>';
 	$textPrinted = false;
@@ -207,7 +207,7 @@ foreach($tresci as $tresc){
 	$html = $html . '<tr>
 						<td>' . $tresc['symbol'] . '</td>
 						<td>' . $tresc['opis'] . '</td>
-						<td>' . $tresc['liczbaGodzin'] . '</td>
+						<td style="text-align:center">' . $tresc['liczbaGodzin'] . '</td>
 					</tr>';
 	$sumaGodzin = $sumaGodzin + $tresc['liczbaGodzin'];
 }
@@ -215,7 +215,7 @@ if($textPrinted){
 	$html = $html . '<tr>
 						<td></td>
 						<td>Suma godzin</td>
-						<td>' . $sumaGodzin . '</td>
+						<td style="text-align:center">' . $sumaGodzin . '</td>
 					</tr>
 				</table><br/>';
 	$textPrinted = false;
@@ -237,7 +237,7 @@ foreach($tresci as $tresc){
 	$html = $html . '<tr>
 						<td>' . $tresc['symbol'] . '</td>
 						<td>' . $tresc['opis'] . '</td>
-						<td>' . $tresc['liczbaGodzin'] . '</td>
+						<td style="text-align:center">' . $tresc['liczbaGodzin'] . '</td>
 					</tr>';
 	$sumaGodzin = $sumaGodzin + $tresc['liczbaGodzin'];
 }
@@ -245,7 +245,7 @@ if($textPrinted){
 	$html = $html . '<tr>
 						<td></td>
 						<td>Suma godzin</td>
-						<td>' . $sumaGodzin . '</td>
+						<td style="text-align:center">' . $sumaGodzin . '</td>
 					</tr>
 				</table><br/>';
 	$textPrinted = false;
@@ -267,7 +267,7 @@ foreach($tresci as $tresc){
 		$html = $html . '<tr>
 						<td>' . $tresc['symbol'] . '</td>
 						<td>' . $tresc['opis'] . '</td>
-						<td>' . $tresc['liczbaGodzin'] . '</td>
+						<td style="text-align:center">' . $tresc['liczbaGodzin'] . '</td>
 					</tr>';
 	$sumaGodzin = $sumaGodzin + $tresc['liczbaGodzin'];
 }
@@ -275,7 +275,7 @@ if($textPrinted){
 	$html = $html . '<tr>
 						<td></td>
 						<td>Suma godzin</td>
-						<td>' . $sumaGodzin . '</td>
+						<td style="text-align:center">' . $sumaGodzin . '</td>
 					</tr>
 				</table><br/>';
 	$textPrinted = false;
