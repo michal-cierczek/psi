@@ -1,7 +1,5 @@
 <?php
-
 namespace app\controllers;
-
 use Yii;
 use app\models\Przedmiot;
 use app\models\PrzedmiotSearch;
@@ -19,31 +17,46 @@ use app\models\TresciProgramowe;
 use app\models\TresciProgramoweSearch;
 use yii\filters\AccessControl;
 use yii\data\SqlDataProvider;
-use yii\helpers\Url;
 use kartik\mpdf\Pdf;
+use yii\helpers\Url;
 use app\models\Ocena;
 use app\models\OcenaSearch;
-
 /**
  * PrzedmiotController implements the CRUD actions for Przedmiot model.
  */
 class PrzedmiotController extends Controller
 {
-
+    public function behaviors()
+    {
+        return [
+        		'access' => [
+        				'class' => AccessControl::className(),
+        				'only' => ['index'],
+        				'rules' => [
+        						[
+        								'allow' => true,
+        								'actions' => ['index'],
+        								'roles' => ['@'],
+        						],
+        				],
+        				'denyCallback' => function ($rule, $action) {
+						return $this->redirect(Url::to(['/user/login']));
+						}
+        				],
+        ];
+    }
     /**
      * Lists all Przedmiot models.
      * @return mixed
      */
     public function actionIndex()
     {
-    	Yii::trace(Yii::$app->user->can('update'));
         $searchModel = new PrzedmiotSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 // 		$dataProvider = new SqlDataProvider([
 // 		    'sql' => 'SELECT * FROM przedmiot WHERE user_id=' . Yii::$app->user->id,
 		   
 // 		]);
-
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -60,7 +73,6 @@ class PrzedmiotController extends Controller
     	]);
     }
    
-
     /**
      * Displays a single Przedmiot model.
      * @param integer $id
@@ -70,9 +82,6 @@ class PrzedmiotController extends Controller
      */
     public function actionView($nazwaPolska)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id, $kierunekStudiow_id, $user_id),
-        ]);
     $content = $this->renderPartial('viewPdf', ['nazwaPolska' => $nazwaPolska]);
  
     // setup kartik\mpdf\Pdf component
@@ -104,7 +113,6 @@ class PrzedmiotController extends Controller
     // return the pdf output as per the destination setting
     return $pdf->render(); 
     }
-
     /**
      * Creates a new Przedmiot model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -153,7 +161,6 @@ class PrzedmiotController extends Controller
     	return $this->render('update', ['model' => $model, 'id' => $id, 'step' => $step, 'forModal' => $forModal]);      
    
     }
-
     /**
      * Updates an existing Przedmiot model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -247,7 +254,6 @@ class PrzedmiotController extends Controller
     	}
     	return $this->render('update', ['model' => $model, 'id' => $id, 'step' => $step, 'forModal' => $forModal]);      
     }
-
     /**
      * Deletes an existing Przedmiot model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
@@ -259,10 +265,8 @@ class PrzedmiotController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-
         return $this->redirect(['index']);
     }
-
     /**
      * Finds the Przedmiot model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
