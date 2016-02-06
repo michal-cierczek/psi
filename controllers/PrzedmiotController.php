@@ -22,6 +22,7 @@ use kartik\mpdf\Pdf;
 use app\models\Ocena;
 use app\models\OcenaSearch;
 use app\models\KierunekSearch;
+use app\models\User;
 
 /**
  * PrzedmiotController implements the CRUD actions for Przedmiot model.
@@ -88,16 +89,21 @@ public function behaviors()
      * @return mixed
      */
     public function actionView($id, $kodKursu, $wymaganie, $nazwaPolska, $nazwaAngielska, $kierunekStudiow_id,
-    		$published, $user_id, $grupaKursow, $litPodstawowa, $litUzupelniajaca, $kierunekNazwa, $kierunekSpec, $kierunekStopien)
+    		$published, $user_id, $grupaKursow, $litPodstawowa, $litUzupelniajaca, $kierunekNazwa, $kierunekSpec, 
+    		$kierunekStopien, $userName, $userSurname, $userEmail)
     {
     $kursy = Kurs::find()->where(['przedmiot_id'=>$id])->AsArray()->all();
     $cele = CelKP::find()->where(['przedmiot_id'=>$id])->AsArray()->all();
+    $peki = Pek::find()->where(['przedmiot_id'=>$id])->AsArray()->all();
+    $tresci = TresciProgramowe::find()->where(['przedmiot_id'=>$id])->AsArray()->all();
+    $narzedzia = NarzedziaDydaktyczne::find()->where(['przedmiot_id'=>$id])->AsArray()->all();
     
     $content = $this->renderPartial('viewPdf', ['id' => $id, 'kodKursu' => $kodKursu, 'wymaganie' => $wymaganie,
     		 'nazwaPolska' => $nazwaPolska, 'nazwaAngielska' => $nazwaAngielska, 'kierunekStudiow_id' => $kierunekStudiow_id,
     		'published' => $published, 'user_id' => $user_id, 'grupaKursow' => $grupaKursow, 'litPodstawowa' => $litPodstawowa,
     		'litUzupelniajaca' => $litUzupelniajaca, 'kierunekNazwa' => $kierunekNazwa, 'kierunekSpec' => $kierunekSpec,
-    		'kierunekStopien' => $kierunekStopien, 'kursy' => $kursy
+    		'kierunekStopien' => $kierunekStopien, 'kursy' => $kursy, 'cele' => $cele, 'peki' => $peki, 'tresci' => $tresci,
+    		'narzedzia' => $narzedzia, 'userName' => $userName, 'userSurname' => $userSurname, 'userEmail' => $userEmail
     ]);
  
     // setup kartik\mpdf\Pdf component
