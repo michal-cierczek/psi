@@ -125,7 +125,7 @@ foreach($peki as $pek){
 	if($pek['kategoria'] == 2)
 		$html = $html . $pek['symbol'] . ' ' . $pek['opis'] . '<br/>';
 }
-$html = $html . '</div>';
+$html = $html . '</div><br/>';
 
 //============= TREŚCI PROGRAMOWE =================
 $html = $html . '<div class="borders"><p class="centers">TREŚCI PROGRAMOWE</p></div>';
