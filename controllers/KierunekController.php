@@ -16,25 +16,30 @@ use yii\helpers\Url;
  */
 class KierunekController extends Controller
 {
-    public function behaviors()
-    {
-        return [
-        		'access' => [
-        				'class' => AccessControl::className(),
-        				'only' => ['index'],
-        				'rules' => [
-        						[
-        								'allow' => true,
-        								'actions' => ['index'],
-        								'roles' => ['@'],
-        						],
-        				],
-        				'denyCallback' => function ($rule, $action) {
-						return $this->redirect(Url::to(['/user/login']));
-						}
-        			],
-        ];
-    }
+	public function behaviors()
+	{
+		return [
+				'access' => [
+						'class' => AccessControl::className(),
+						'only' => ['update'],
+						'ruleConfig' => [
+								'class' => 'app\components\AccessRule' // OUR OWN RULE
+						],
+						'rules' => [
+								[
+										'allow' => true,
+										'actions' => ['update'],
+										'roles' => ['admin'],
+								],
+								[
+								'allow' => true,
+								'actions' => ['index'],
+								'roles' => ['@'],
+								],
+						],
+				],
+		];
+	}
 
     /**
      * Lists all Kierunek models.
