@@ -49,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
 						},
 						'view' => function($url, $model, $key)
 						{
-							$icon = '<span class="glyphicon glyphicon-pencil"></span>';
+							$icon = '<span class="glyphicon glyphicon-eye-open"></span>';
 							$label = 'Pokaz';
 							$url = Url::to(["view", 
 									'id' => $model -> id,
