@@ -60,7 +60,7 @@ AppAsset::register($this);
 	                ],
         		
         	Yii::$app->user->isGuest ?
-        		['label' => 'Rejestracja', 'url' => ['/user/register']] :
+        		['label' => ''] :
         		[
         				'label' => 'Rejestracja', 'url' => ['/user/register']
         		],

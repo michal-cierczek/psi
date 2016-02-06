@@ -16,8 +16,8 @@ $this->params['breadcrumbs'][] = $this->title;
 	<br/>
 	<h3>Autorzy:</h3>
     <ul>
-    	<li> Michał Cierczek, 192578
-    	<li> Mariusz Sikociński, 192573
-    	<li> Marcin Klimiuk, 192550
+    	<li> Michał Cierczek <a href="mailto:192578@student.pwr.edu.pl">192578@student.pwr.edu.pl</a>
+    	<li> Marcin Klimiuk <a href="mailto:192550@student.pwr.edu.pl">192550@student.pwr.edu.pl</a>
+    	<li> Mariusz Sikociński <a href="mailto:192573@student.pwr.edu.pl">192550@student.pwr.edu.pl</a>
     </ul>
 </div>
