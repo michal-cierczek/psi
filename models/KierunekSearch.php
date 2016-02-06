@@ -19,7 +19,7 @@ class KierunekSearch extends Kierunek
     {
         return [
             [['id', 'stopien'], 'integer'],
-            [['opis', 'skrot', 'cykl'], 'safe'],
+            [['opis', 'skrot', 'cykl', 'specjalnosc'], 'safe'],
         ];
     }
 
@@ -62,7 +62,8 @@ class KierunekSearch extends Kierunek
 
         $query->andFilterWhere(['like', 'opis', $this->opis])
             ->andFilterWhere(['like', 'skrot', $this->skrot])
-        	->andFilterWhere(['like', 'cykl', $this->cykl]);
+        	->andFilterWhere(['like', 'cykl', $this->cykl])
+        ->andFilterWhere(['like', 'specjalnosc', $this->specjalnosc]);
 
         return $dataProvider;
     }

@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	
 	
     <p>
-        <?= Html::a('Create Przedmiot', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Przedmiot', ['create', 'step'=>'12'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -48,6 +48,35 @@ $this->params['breadcrumbs'][] = $this->title;
 	        				$icon = '<span class="glyphicon glyphicon-pencil"></span>';
 	        				$label = 'Edytuj';
 	        				$url = Url::to(["update", 'id' =>$model -> id, 'step' => '1']);
+							return !(Yii::$app->user->isGuest) ?  Html::a($icon, $url, ['title' => $label]):'';
+						},
+						'delete' => function($url, $model, $key)
+						{
+							$icon = '<span class="glyphicon glyphicon-trash"></span>';
+							$label = 'Usun';
+							$url = Url::to(["delete", 'id' =>$model -> id, 'step' => '1']);
+							return !(Yii::$app->user->isGuest) ?  Html::a($icon, $url, ['title' => $label]):'';
+						},
+						'view' => function($url, $model, $key)
+						{
+							$icon = '<span class="glyphicon glyphicon-eye-open"></span>';
+							$label = 'Pokaz';
+							$url = Url::to(["view", 
+									'id' => $model -> id,
+									'kodKursu' => $model -> kodKursu,
+									'wymaganie' => $model -> wymaganie,
+									'nazwaPolska' => $model -> nazwaPolska,
+									'nazwaAngielska' => $model -> nazwaAngielska,
+									'kierunekStudiow_id' => $model -> kierunekStudiow_id,
+									'kierunekNazwa' => $model -> kierunekStudiow ->opis,
+									'kierunekSpec' => $model -> kierunekStudiow -> specjalnosc,
+									'kierunekStopien' => $model -> kierunekStudiow -> stopien,
+									'published' => $model -> published,
+									'user_id' => $model -> user_id,
+									'grupaKursow' => $model -> grupaKursow,
+									'litPodstawowa' => $model -> litPodstawowa,
+									'litUzupelniajaca' => $model -> litUzupelniajaca
+							]);
 							return Html::a($icon, $url, ['title' => $label]);
 						}
     				]
