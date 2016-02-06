@@ -1,13 +1,10 @@
 <?php
-
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\GridView;
-
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\PrzedmiotSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
-
 $this->title = 'Przedmioty';
 $this->params['breadcrumbs'][] = $this->title;
 ?>

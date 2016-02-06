@@ -12,8 +12,8 @@ use yii\web\IdentityInterface;
 
 class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
-	const TYPE_ADMIN = 1;
-	const TYPE_USER = 2;
+	const TYPE_ADMIN = 'admin';
+	const TYPE_USER = 'author';
 	/**
 	 * @inheritdoc
 	 */

@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
         						$icon = '<span class="glyphicon glyphicon-trash"></span>';
         						$label = 'Usun';
         						$url = Url::to(["/kek/delete", 'id' =>$model->id, 'kid' => $model->kierunekStudiow_id]);
-								return Html::a($icon, $url, ['title' => $label]);
+								return Yii::$app->user->identity->groupId=='admin'? Html::a($icon, $url, ['title' => $label]):'';
 								}
 						                		
     				]

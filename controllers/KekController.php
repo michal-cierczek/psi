@@ -7,7 +7,7 @@ use app\models\Kek;
 use app\models\KekSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * KekController implements the CRUD actions for Kek model.
@@ -19,6 +19,25 @@ class KekController extends Controller
      * Lists all Kek models.
      * @return mixed
      */
+     public function behaviors()
+     {
+     	return [
+     			'access' => [
+     					'class' => AccessControl::className(),
+     					'only' => ['create','delete'],
+     					'ruleConfig' => [
+     							'class' => 'app\components\AccessRule' // OUR OWN RULE
+     					],
+     					'rules' => [
+     							[
+     									'allow' => true,
+     									'actions' => ['create','delete'],
+     									'roles' => ['admin'],
+     							],
+     					],
+     			],
+     	];
+     }
     public function actionIndex($kid = null)
     {
 //     	if(is_null($kid))

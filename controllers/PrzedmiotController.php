@@ -52,7 +52,6 @@ public function behaviors()
         				],
         ];
     }
-
     /**
      * Lists all Przedmiot models.
      * @return mixed
@@ -65,7 +64,6 @@ public function behaviors()
 // 		    'sql' => 'SELECT * FROM przedmiot WHERE user_id=' . Yii::$app->user->id,
 		   
 // 		]);
-
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -82,7 +80,6 @@ public function behaviors()
     	]);
     }
    
-
     /**
      * Displays a single Przedmiot model.
      * @param integer $id
@@ -90,7 +87,7 @@ public function behaviors()
      * @param integer $user_id
      * @return mixed
      */
-public function actionView($id, $kodKursu, $wymaganie, $nazwaPolska, $nazwaAngielska, $kierunekStudiow_id,
+    public function actionView($id, $kodKursu, $wymaganie, $nazwaPolska, $nazwaAngielska, $kierunekStudiow_id,
     		$published, $user_id, $grupaKursow, $litPodstawowa, $litUzupelniajaca, $kierunekNazwa, $kierunekSpec, $kierunekStopien)
     {
     $kursy = Kurs::find()->where(['przedmiot_id'=>$id])->AsArray()->all();
@@ -132,7 +129,6 @@ public function actionView($id, $kodKursu, $wymaganie, $nazwaPolska, $nazwaAngie
     // return the pdf output as per the destination setting
     return $pdf->render(); 
     }
-
     /**
      * Creates a new Przedmiot model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -174,7 +170,6 @@ public function actionView($id, $kodKursu, $wymaganie, $nazwaPolska, $nazwaAngie
     	      
    
     }
-
     /**
      * Updates an existing Przedmiot model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -268,7 +263,6 @@ public function actionView($id, $kodKursu, $wymaganie, $nazwaPolska, $nazwaAngie
     	}
     	return $this->render('update', ['model' => $model, 'id' => $id, 'step' => $step, 'forModal' => $forModal]);      
     }
-
     /**
      * Deletes an existing Przedmiot model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
@@ -282,7 +276,6 @@ public function actionDelete($id)
         $this->findModel($id)->delete();
         return $this->redirect(['index']);
     }
-
     /**
      * Finds the Przedmiot model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
