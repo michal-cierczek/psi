@@ -19,6 +19,7 @@ use app\models\TresciProgramowe;
 use app\models\TresciProgramoweSearch;
 use yii\filters\AccessControl;
 use yii\data\SqlDataProvider;
+use yii\helpers\Url;
 use kartik\mpdf\Pdf;
 use yii\helpers\Url;
 use app\models\Ocena;
@@ -86,9 +87,9 @@ class PrzedmiotController extends Controller
      * @param integer $user_id
      * @return mixed
      */
-    public function actionView($id)
+    public function actionView($nazwaPolska)
     {
-    $content = $this->renderPartial('viewPdf');
+    $content = $this->renderPartial('viewPdf', ['nazwaPolska' => $nazwaPolska]);
  
     // setup kartik\mpdf\Pdf component
     $pdf = new Pdf([
