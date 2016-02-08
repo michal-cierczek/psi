@@ -39,8 +39,18 @@ class TresciProgramowe extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['symbol', 'opis', 'liczbaGodzin', 'formaZajec', 'przedmiot_id'], 'required'],
+            [['symbol', 'opis', 'liczbaGodzin', 'formaZajec', 'przedmiot_id'], 'required',
+            		'message' => 'To pole nie może być puste.'
+            ],
             [['opis'], 'string'],
+        	[
+        		['symbol'],
+        		'match', 'pattern'=>'/^[A-Z]{1}[a-z]{1}[[0-9]{1}|[0-9]{2}]$/',
+        		'message'=>'Niepoprawna forma. Symbol musi zaczynać się od dużej litery, drugą literą jst mała litera, następnie liczba.'
+        	],
+        	['liczbaGodzin', 'compare', 'compareValue' => 30, 'operator' => '<=',
+        		'message' => 'Zbyt duża wartość.'
+        	],
             [['liczbaGodzin', 'przedmiot_id'], 'integer'],
             [['symbol', 'formaZajec'], 'string', 'max' => 45]
         ];
