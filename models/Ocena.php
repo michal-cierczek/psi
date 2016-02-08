@@ -84,4 +84,5 @@ class Ocena extends \yii\db\ActiveRecord
     	
     	return $result;
     }
+
 }

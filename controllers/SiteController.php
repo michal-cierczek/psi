@@ -61,4 +61,7 @@ class SiteController extends Controller {
 	public function actionAbout() {
 		return $this->render ( 'about' );
 	}
+	public function actionError($message=null) {
+		return $this->render ( 'error', ['message'=>$message] );
+	}
 }

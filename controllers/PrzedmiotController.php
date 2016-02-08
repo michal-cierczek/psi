@@ -99,13 +99,15 @@ public function behaviors()
     $peki = Pek::find()->where(['przedmiot_id'=>$id])->AsArray()->all();
     $tresci = TresciProgramowe::find()->where(['przedmiot_id'=>$id])->AsArray()->all();
     $narzedzia = NarzedziaDydaktyczne::find()->where(['przedmiot_id'=>$id])->AsArray()->all();
+    $oceny = Ocena::find()->where(['przedmiot_id'=>$id])->all();
     
     $content = $this->renderPartial('viewPdf', ['id' => $id, 'kodKursu' => $kodKursu, 'wymaganie' => $wymaganie,
     		 'nazwaPolska' => $nazwaPolska, 'nazwaAngielska' => $nazwaAngielska, 'kierunekStudiow_id' => $kierunekStudiow_id,
     		'published' => $published, 'user_id' => $user_id, 'grupaKursow' => $grupaKursow, 'litPodstawowa' => $litPodstawowa,
     		'litUzupelniajaca' => $litUzupelniajaca, 'kierunekNazwa' => $kierunekNazwa, 'kierunekSpec' => $kierunekSpec,
     		'kierunekStopien' => $kierunekStopien, 'kursy' => $kursy, 'cele' => $cele, 'peki' => $peki, 'tresci' => $tresci,
-    		'narzedzia' => $narzedzia, 'userName' => $userName, 'userSurname' => $userSurname, 'userEmail' => $userEmail
+    		'narzedzia' => $narzedzia, 'userName' => $userName, 'userSurname' => $userSurname, 'userEmail' => $userEmail,
+    		'oceny' => $oceny,
     ]);
  
     // setup kartik\mpdf\Pdf component
@@ -252,11 +254,12 @@ public function behaviors()
     				$model = new Przedmiot();
     			break;
     	}
-    	//if(Yii::$app->user->identity->groupId !== 'admin' or $model->user_id != Yii::$app->user->identity->id){
-    		//Yii::trace(Yii::$app->user->identity->groupId);
-    		//Yii::trace(Yii::$app->user->identity->username);
-    		//echo $this->redirect('/user/login');}
-    	//else{
+    	if(Yii::$app->user->identity->groupId != 'admin' && $model->user_id != Yii::$app->user->identity->id){
+    		Yii::trace(Yii::$app->user->identity->groupId);
+    		Yii::trace(Yii::$app->user->identity->id);
+    		throw new \yii\base\ErrorException( "Nie masz odpowiednich uprawnień do edycji tej karty przedmiotu." );
+    		}
+    	else{
     	
 	    	if ($step != 2 && $step != 4 && $step != 5 && $step != 6 && $step != 7 && $step != 8 && $model->load(Yii::$app->request->post()) && $model->save()) {
 	    		if(step!=11)
@@ -300,7 +303,7 @@ public function behaviors()
 	    		}
 	    	}
 	    	return $this->render('update', ['model' => $model, 'id' => $id, 'step' => $step, 'forModal' => $forModal]);      
-   		 //}
+   		 }
     }
     /**
      * Deletes an existing Przedmiot model.
