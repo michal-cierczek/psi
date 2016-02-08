@@ -202,6 +202,7 @@ public function behaviors()
      */
     public function actionUpdate($step, $id=null)
     {
+    	
     	$forModal = null;
     	switch($step){
     		case '1':
@@ -251,49 +252,55 @@ public function behaviors()
     				$model = new Przedmiot();
     			break;
     	}
+    	//if(Yii::$app->user->identity->groupId !== 'admin' or $model->user_id != Yii::$app->user->identity->id){
+    		//Yii::trace(Yii::$app->user->identity->groupId);
+    		//Yii::trace(Yii::$app->user->identity->username);
+    		//echo $this->redirect('/user/login');}
+    	//else{
     	
-    	if ($step != 2 && $step != 4 && $step != 5 && $step != 6 && $step != 7 && $step != 8 && $model->load(Yii::$app->request->post()) && $model->save()) {
-    		if(step!=11)
-    		{
-    			return $this->redirect(['update', 'id' => $id, 'step'=>$step]);
-    			$step++;
-    		}
-    		else 
-    		{
-    			return $this->redirect(['index']);
-    		}
-    		
-    	}else{
-    		if($step==4 && $forModal->load(Yii::$app->request->post()) && $forModal->save()){
-    			$forModal = new CelKP();
-    		}
-    		elseif($step==2 && $forModal->load(Yii::$app->request->post()) && $forModal->save()){
-    			$forModal = new Kurs();
-    		}
-    		elseif($step==5 && $forModal->load(Yii::$app->request->post()) && $forModal->save()){
-    			$forModal = new Pek();
-    		}
-    		elseif($step==6 && $forModal->load(Yii::$app->request->post()) && $forModal->save()){
-    			$forModal = new TresciProgramowe();
-    		}
-    		elseif($step==7 && $forModal->load(Yii::$app->request->post()) && $forModal->save()){
-    			$forModal = new NarzedziaDydaktyczne();
-    		}
-    		elseif($step==8 && $forModal->load(Yii::$app->request->post())){
-    			$forModal->przedmiot_id = $id;
-    			$forModal->save();
-    			if($wybranePek = Yii::$app->request->post()['wybranePek']){
-    				foreach($wybranePek as $pek){
-    					$ocenapek = new OcenaOsiagnieciaPekpek();
-    					$ocenapek->pek_id = $pek;
-    					$ocenapek->ocenaOsiagnieciaPek_id = $forModal->id;
-    					$ocenapek->save();
-    				}
-    			}
-    			$forModal = new Ocena();
-    		}
-    	}
-    	return $this->render('update', ['model' => $model, 'id' => $id, 'step' => $step, 'forModal' => $forModal]);      
+	    	if ($step != 2 && $step != 4 && $step != 5 && $step != 6 && $step != 7 && $step != 8 && $model->load(Yii::$app->request->post()) && $model->save()) {
+	    		if(step!=11)
+	    		{
+	    			return $this->redirect(['update', 'id' => $id, 'step'=>$step]);
+	    			$step++;
+	    		}
+	    		else 
+	    		{
+	    			return $this->redirect(['index']);
+	    		}
+	    		
+	    	}else{
+	    		if($step==4 && $forModal->load(Yii::$app->request->post()) && $forModal->save()){
+	    			$forModal = new CelKP();
+	    		}
+	    		elseif($step==2 && $forModal->load(Yii::$app->request->post()) && $forModal->save()){
+	    			$forModal = new Kurs();
+	    		}
+	    		elseif($step==5 && $forModal->load(Yii::$app->request->post()) && $forModal->save()){
+	    			$forModal = new Pek();
+	    		}
+	    		elseif($step==6 && $forModal->load(Yii::$app->request->post()) && $forModal->save()){
+	    			$forModal = new TresciProgramowe();
+	    		}
+	    		elseif($step==7 && $forModal->load(Yii::$app->request->post()) && $forModal->save()){
+	    			$forModal = new NarzedziaDydaktyczne();
+	    		}
+	    		elseif($step==8 && $forModal->load(Yii::$app->request->post())){
+	    			$forModal->przedmiot_id = $id;
+	    			$forModal->save();
+	    			if($wybranePek = Yii::$app->request->post()['wybranePek']){
+	    				foreach($wybranePek as $pek){
+	    					$ocenapek = new OcenaOsiagnieciaPekpek();
+	    					$ocenapek->pek_id = $pek;
+	    					$ocenapek->ocenaOsiagnieciaPek_id = $forModal->id;
+	    					$ocenapek->save();
+	    				}
+	    			}
+	    			$forModal = new Ocena();
+	    		}
+	    	}
+	    	return $this->render('update', ['model' => $model, 'id' => $id, 'step' => $step, 'forModal' => $forModal]);      
+   		 //}
     }
     /**
      * Deletes an existing Przedmiot model.

@@ -90,4 +90,12 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 			return false;
 		}
 	}
+	public static function usersForSelect(){
+		$result = [];
+		foreach(User::find()->each() as $user){
+			$result[$user->id] = $user->name . ' ' . $user->surname . ' (' . $user->username . ')';
+		}
+		 
+		return $result;
+	}
 }

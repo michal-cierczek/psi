@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use app\models\User;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Przedmiot */
@@ -26,7 +27,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'nazwaAngielska')->textInput() ?>
     
+    <?= $form->field($model, 'user_id')->dropDownList(User::usersForSelect())?>
+    
     <?= $form->field($model, 'grupaKursow')->checkbox() ?>
+    
     
     <?= $form->field($model, 'kierunekStudiow_id')->hiddenInput(['value' => $kierunekId])->label(false) ?>
     
