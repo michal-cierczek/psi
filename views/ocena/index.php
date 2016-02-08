@@ -22,7 +22,15 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
         	'symbol',
             'opis:ntext',
-        	'peks',
+        	[
+        		'label' => 'PEK',
+        		'value' => function($model){
+        			$result = '';
+        			foreach($model->peks as $pek) $result .= $pek->symbol . ', ';
+        			$result = substr($result, 0, -2);
+        			return $result;
+        		}
+        	],
             [
             	'class' => 'yii\grid\ActionColumn',
             	'controller' => 'ocena',
