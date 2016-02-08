@@ -6,7 +6,9 @@ use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Przedmiot */
-
+if(!Yii::$app->user->identity->groupID=='admin' || $model->user_id != Yii::$app->user->identity->id)
+	echo $this->redirect('/user/login');
+else{
 $this->title = 'Edycja karty przedmiotu. Krok: ' . ' ' . $step;
 $this->params['breadcrumbs'][] = ['label' => 'Przedmiots', 'url' => ['index']];
 //$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id, 'kierunekStudiow_id' => $model->kierunekStudiow_id, 'user_id' => $model->user_id]];
@@ -44,3 +46,4 @@ $this->params['breadcrumbs'][] = 'Update';
     ]) ?>
 </div>
 </div>
+<?php }?>

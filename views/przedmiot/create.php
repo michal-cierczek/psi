@@ -18,9 +18,9 @@ $this->params['breadcrumbs'][] = 'Create';
 		'encodeLabels' => false,
 		'heading' => false,
 		'items' => [
-				['label' => 'Informacje podstawowe', 'url' => Url::to(['update', 'step'=>'12'])],
-				['label' => 'Powiązane KEK', 'url' => Url::to(['update', 'step'=>'13'])],
-				['label' => 'Opiekun przedmiotu', 'url' => Url::to(['update', 'step'=>'14'])],
+				['label' => 'Informacje podstawowe', 'url' => Url::to(['create', 'step'=>'13'])],
+				['label' => 'Powiązane KEK', 'url' => Url::to(['create', 'step'=>'14'])],
+				['label' => 'Opiekun przedmiotu', 'url' => Url::to(['create', 'step'=>'15'])],
 							
 		],
 ]); ?>
@@ -29,14 +29,15 @@ $this->params['breadcrumbs'][] = 'Create';
 <div class="przedmiot-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
-<?php if($step!=='12a'){?>
+<?php if($step!='13a'){?>
     <?= $this->render('kroki/' . $step, [
+    	'model' =>$model,
     	'searchModel'=> $searchModel, 'dataProvider' => $dataProvider,
     	'forModal' => $forModal,
     ]) ?>
 <?php }else{
 	echo $this->render('kroki/' . $step, [
-    	'model'=> $formModel, 'kierunekId' => $kierunekId, 'kierunek'=>$kierunek, 'specjalnosc'=>$specjalnosc, 'cykl'=>$cykl
+    	'model'=> $model, 'kierunekId' => $kierunekId, 'kierunek'=>$kierunek, 'specjalnosc'=>$specjalnosc, 'cykl'=>$cykl
     ]);
 }?>
 </div>

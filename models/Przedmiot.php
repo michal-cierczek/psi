@@ -14,6 +14,7 @@ use Yii;
  * @property string $nazwaAngielska
  * @property integer $kierunekStudiow_id
  * @property integer $published
+ * @property integer $grupaKursow
  * @property integer $user_id
  * @property string $litPodstawowa
  * @property string $litUzupelniajaca
@@ -43,11 +44,12 @@ class Przedmiot extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['kodKursu', 'wymaganie', 'nazwaPolska', 'nazwaAngielska', 'kierunekStudiow_id', 'published', 'user_id'], 'required'],
+            [['kodKursu', 'nazwaPolska', 'nazwaAngielska', 'kierunekStudiow_id', 'published', 'user_id'], 'required'],
             [['kierunekStudiow_id', 'published', 'user_id'], 'integer'],
             [['kodKursu', 'wymaganie', 'litPodstawowa', 'litUzupelniajaca'], 'string'],
             [['nazwaPolska', 'nazwaAngielska'], 'string', 'max' => 100],
-            [['kodKursu'], 'unique']
+            [['kodKursu'], 'unique'],
+        	[['grupaKursow'], 'safe']
         ];
     }
 

@@ -24,6 +24,7 @@ use app\models\OcenaSearch;
 use app\models\KierunekSearch;
 use app\models\User;
 use app\models\OcenaOsiagnieciaPekpek;
+use app\models\KierunekStudiow;
 
 /**
  * PrzedmiotController implements the CRUD actions for Przedmiot model.
@@ -145,30 +146,44 @@ public function behaviors()
     {
         $forModal = null;
     	switch($step){
-    		case '12':
-    				
+    		case '13':
+    				$model=new KierunekStudiow();
     				$searchModel = new KierunekSearch();
     				$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-    				return $this->render('create', ['searchModel'=> $searchModel, 'dataProvider' => $dataProvider, 'step' => $step, 'forModal' => $forModal]);
     				break;
-    		case '12a':
-    			$formModel = new Przedmiot();
-    			return $this->render('create', ['step' => $step, 'formModel'=>$formModel, 'kierunekId' => $kierunekId, 'kierunek'=>$kierunek, 'specjalnosc'=>$specjalnosc, 'cykl'=>$cykl]);
+    		case '13a':
+    				$model = new Przedmiot();
+    				break;
+    		case '14' :
+    				$model = new Pek();
+    				$searchModel = new PekSearch();
+    				$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+    				break;
+    			
     	}
     	
     	
- /*   	if ($model->load(Yii::$app->request->post()) && $model->save()) {
-    		if(step!=11)
-    		{
-    			return $this->redirect(['create', 'step'=>$step]);
-    			$step++;
-    		}
-    		else 
-    		{
-    			return $this->redirect(['index']);
-    		}
+  	 	if ($step=='13a' && $model->load(Yii::$app->request->post()) && $model->save()) {
+  	 		$step='14';
+  	 		return $this->redirect(['create', 'step' => $step, 'model'=>$model, 'kierunekId' => $kierunekId, 'kierunek'=>$kierunek, 'specjalnosc'=>$specjalnosc, 'cykl'=>$cykl]);
+  	 		
+  	 	
+  	 	}
+  	 	elseif($step=='13a'){
+  	 		return $this->render('create', ['step' => $step, 'model'=>$model, 'kierunekId' => $kierunekId, 'kierunek'=>$kierunek, 'specjalnosc'=>$specjalnosc, 'cykl'=>$cykl]);
+  	 	}
+  	 	if ($model->load(Yii::$app->request->post()) && $model->save()){
+  	 		return $this->redirect(['create', 'model'=>$model, 'searchModel'=> $searchModel, 'dataProvider' => $dataProvider, 'step' => $step, 'forModal' => $forModal]);
+  	 		$step=$step++;
+  	 	}
+  	 	
+  	 	return $this->render('create', ['model'=>$model, 'searchModel'=> $searchModel, 'dataProvider' => $dataProvider, 'step' => $step, 'forModal' => $forModal]);
+  	 	
     		
-    	}else{
+    //			return $this->redirect(['create', 'step'=>'14']);
+    		
+    		
+    	/*else{
     		if($step==4 && $forModal->load(Yii::$app->request->post()) && $forModal->save()){
     			$forModal = new CelKP();
     		}
