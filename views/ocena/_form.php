@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use dosamigos\multiselect\MultiSelect;
+use app\models\Ocena;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Ocena */
@@ -16,8 +18,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'opis')->textarea(['rows' => 6]) ?>
     
-    <?= $form->field($model, 'symbol')->textInput(['maxlength' => true]) ?>
-    
+    <?= MultiSelect::widget([
+    		'data' => Ocena::peksForMultiselect($kid),
+    		'name' => 'wybranePek',
+    		'options' => [
+    			'multiple' => 'multiple'
+    		]
+    ])?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

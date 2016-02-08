@@ -23,6 +23,7 @@ use app\models\Ocena;
 use app\models\OcenaSearch;
 use app\models\KierunekSearch;
 use app\models\User;
+use app\models\OcenaOsiagnieciaPekpek;
 
 /**
  * PrzedmiotController implements the CRUD actions for Przedmiot model.
@@ -263,7 +264,17 @@ public function behaviors()
     		elseif($step==7 && $forModal->load(Yii::$app->request->post()) && $forModal->save()){
     			$forModal = new NarzedziaDydaktyczne();
     		}
-    		elseif($step==8 && $forModal->load(Yii::$app->request->post()) && $forModal->save()){
+    		elseif($step==8 && $forModal->load(Yii::$app->request->post())){
+    			$forModal->przedmiot_id = $id;
+    			$forModal->save();
+    			if($wybranePek = Yii::$app->request->post()['wybranePek']){
+    				foreach($wybranePek as $pek){
+    					$ocenapek = new OcenaOsiagnieciaPekpek();
+    					$ocenapek->pek_id = $pek;
+    					$ocenapek->ocenaOsiagnieciaPek_id = $forModal->id;
+    					$ocenapek->save();
+    				}
+    			}
     			$forModal = new Ocena();
     		}
     	}

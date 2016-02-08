@@ -68,4 +68,13 @@ class Ocena extends \yii\db\ActiveRecord
     {
     	Pek::find()->where(['przedmiot_id'=>$id])->asArray()->all();
     }
+    
+    public static function peksForMultiselect($id){
+    	$result = [];
+    	foreach(Pek::find()->where(['przedmiot_id' => $id])->each() as $pek){
+    		$result[$pek->id] = $pek->symbol . ': ' . $pek->opis;
+    	}
+    	
+    	return $result;
+    }
 }

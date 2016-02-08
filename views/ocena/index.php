@@ -52,7 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <h4 class="modal-title" id="myModalLabel">Dodaj Ocenę!</h4>
       </div>
       <div class="modal-body">
-      <?= $this->render('/ocena/_form', ['model' => $model])?>
+      <?= $this->render('/ocena/_form', ['model' => $model, 'kid' => $kid])?>
       </div>
     </div>
   </div>
