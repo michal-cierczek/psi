@@ -280,7 +280,7 @@ public function behaviors()
     	else{
     	
 	    	if ($step != 2 && $step != 4 && $step != 5 && $step != 6 && $step != 7 && $step != 8 && $model->load(Yii::$app->request->post()) && $model->save()) {
-	    		if(step!=11)
+	    		if($step!=11)
 	    		{
 	    			return $this->redirect(['update', 'id' => $id, 'step'=>$step]);
 	    			$step++;
