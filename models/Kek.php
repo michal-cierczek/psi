@@ -46,11 +46,6 @@ class Kek extends \yii\db\ActiveRecord
             'message' => 'To pole nie może być puste.'
             ],
             ['kategoria', 'integer'],
-             [
-            	['symbol'], 
-            	'match', 'pattern'=>'/^K_[A-Z]{1}[0-9]{2}$/', 
-            	'message'=>'Niepoprawna forma. Symbol musi zaczynać się od ciągu znaków "K_" następującej po nim dużej litery oraz dwóch cyfr.'	
-            ],
             [['opis'], 'string', 'max' => 255,
             'message' => 'Zbyt długi ciąg znaków.'
             ],
