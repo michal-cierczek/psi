@@ -82,6 +82,15 @@ public function behaviors()
     			'dataProvider' => $dataProvider,
     	]);
     }
+    public function actionOpublikuj($id)
+    {
+    	
+    	$model = Przedmiot::find() -> where(['id' => $id]) -> one();
+    	$model['published']='1';
+    	$model->save();
+    	return $this->redirect('index');
+    	
+    }
    
     /**
      * Displays a single Przedmiot model.
