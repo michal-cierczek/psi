@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use dosamigos\multiselect\MultiSelect;
 use app\models\Ocena;
+use dosamigos\tinymce\TinyMce;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Ocena */
@@ -16,7 +17,18 @@ use app\models\Ocena;
 
     <?= $form->field($model, 'symbol')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'opis')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'opis') -> widget(TinyMce::classname(), [
+    	'options' => ['rows' => 15],
+    	'language' => 'pl',
+    	'clientOptions' => [
+        'plugins' => [
+            "advlist autolink lists link charmap print preview anchor",
+            "searchreplace visualblocks code fullscreen",
+            "insertdatetime media table contextmenu paste"
+        ],
+        'toolbar' => "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+    ]
+]) ?>
     
     <?= MultiSelect::widget([
     		'data' => Ocena::peksForMultiselect($kid),

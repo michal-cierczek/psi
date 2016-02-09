@@ -92,10 +92,10 @@ $html = $html . '<div class="borders"><p class="centers">WYMAGANIA WSTĘPNE W ZA
 		' . $wymaganie . '</div><br/>' .
 // ================== CELE PRZEDMIOTU ==================
 		'<div class="borders"><p class="centers">CELE PRZEDMIOTU<p>';
-$ktoryCel = 1; // nie można brać id z bazy bo są luki
+ // nie można brać id z bazy bo są luki
 foreach($cele as $cel ){
-	$html = $html . 'C' . $ktoryCel . '. ' . $cel['opis'] . '<br/>';
-	$ktoryCel++;
+	$html = $html . $cel['symbol'] . '. ' . $cel['opis'] . '<br/>';
+	
 }
 $html = $html . '</div><br/>';
 // ================== PRZEDMIOTOWE EFEKTY KSZTAŁCENIA ========

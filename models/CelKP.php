@@ -10,6 +10,7 @@ use Yii;
  * @property integer $id
  * @property string $opis
  * @property integer $przedmiot_id
+ * @property string $symbol
  *
  * @property Przedmiot $przedmiot
  */
@@ -30,10 +31,12 @@ class CelKP extends \yii\db\ActiveRecord
     {
         return [
             [['opis'], 'string'],
-            [['przedmiot_id'], 'required',
+            [['przedmiot_id', 'symbol'], 'required',
             		'message' => 'To pole nie może być puste.'
             ],
-            [['przedmiot_id'], 'integer']
+            [['przedmiot_id'], 'integer'],
+        	[['symbol'], 'match', 'pattern'=>'/^C[0-9]{2}$/', 
+            	'message'=>'Niepoprawna forma. Symbol musi zaczynać się od znaku "C" i składać się następnie z dwóch cyfr.'	]
         ];
     }
 
@@ -46,6 +49,7 @@ class CelKP extends \yii\db\ActiveRecord
             'id' => 'ID',
             'opis' => 'Opis',
             'przedmiot_id' => 'Przedmiot ID',
+        	'symbol'=>'Symbol'
         ];
     }
 

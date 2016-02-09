@@ -11,6 +11,8 @@ use yii\widgets\ActiveForm;
 <div class="cel-kp-form">
 
     <?php $form = ActiveForm::begin(); ?>
+    
+    <?= $form->field($model, 'symbol')->textInput() ?>
 
     <?= $form->field($model, 'opis')->textarea(['rows' => 6]) ?>
 

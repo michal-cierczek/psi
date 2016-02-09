@@ -19,7 +19,7 @@ class CelKPSearch extends CelKP
     {
         return [
             [['id', 'przedmiot_id'], 'integer'],
-            [['opis'], 'safe'],
+            [['opis', 'symbol'], 'safe'],
         ];
     }
 

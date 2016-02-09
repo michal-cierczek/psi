@@ -19,7 +19,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'opis:ntext',
+            'symbol',
+        	'opis:ntext',
+        	
             [
             	'class' => 'yii\grid\ActionColumn',
             	'controller' => 'cel-kp',
