@@ -2,6 +2,8 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\GridView;
+use yii\grid\CheckboxColumn;
+use app\models\Przedmiot;
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\PrzedmiotSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -36,6 +38,11 @@ $this->params['breadcrumbs'][] = $this->title;
         		'value' => 'kierunekStudiow.cykl',
         		'label' => 'Cykl'
         	],
+        	['attribute' => 'published',
+        			'value' => function($model){
+        			return Przedmiot::opublikowany[$model->published];
+        	}
+        			],
             ['class' => 'yii\grid\ActionColumn',
             		'template'=>'{view} {update} {delete}',
             		'buttons'=>

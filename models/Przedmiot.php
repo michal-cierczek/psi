@@ -28,7 +28,9 @@ use Yii;
  */
 class Przedmiot extends \yii\db\ActiveRecord
 {
-	
+	const opublikowany = [
+			'0' => 'NIE',
+			'1' => 'TAK',];
 	public $nazwa;
     /**
      * @inheritdoc
