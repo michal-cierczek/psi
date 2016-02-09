@@ -26,7 +26,6 @@ $this->params['breadcrumbs'][] = $this->title;
         		'attribute' => 'opis',
         		'label' => 'Nazwa'
         	],
-            'stopien',
             'skrot',
         	'forma',
         	'stopien',
