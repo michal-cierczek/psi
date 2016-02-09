@@ -65,7 +65,7 @@ class KierunekController extends Controller
     {
         $forModal = new Kek();
     	$searchModel = new KekSearch();
-    	$model = $searchModel->search(['kierunekStudiow_id'=> $id]);
+    	$model = $searchModel->search(['kierunekStudiow'=> $id]);
 
         return $this->render('view', ['model' => $model, 'id' => $id, 'forModal' => $forModal]);
     }

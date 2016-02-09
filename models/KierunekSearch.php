@@ -41,6 +41,7 @@ class KierunekSearch extends Kierunek
      */
     public function search($params)
     {
+    	Yii::trace($params);
         $query = Kierunek::find();
 
         $dataProvider = new ActiveDataProvider([

@@ -42,10 +42,18 @@ class Kek extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['symbol', 'opis', 'kategoria'], 'required'],
+            [['symbol', 'opis', 'kategoria'], 'required',
+            'message' => 'To pole nie może być puste.'
+            ],
             ['kategoria', 'integer'],
-            [['symbol'], 'string', 'max' => 45],
-            [['opis'], 'string', 'max' => 255],
+             [
+            	['symbol'], 
+            	'match', 'pattern'=>'/^K_[A-Z]{1}[0-9]{2}$/', 
+            	'message'=>'Niepoprawna forma. Symbol musi zaczynać się od ciągu znaków "K_" następującej po nim dużej litery oraz dwóch cyfr.'	
+            ],
+            [['opis'], 'string', 'max' => 255,
+            'message' => 'Zbyt długi ciąg znaków.'
+            ],
         	[['kierunekStudiow_id'], 'safe']
         ];
     }
@@ -111,5 +119,19 @@ class Kek extends \yii\db\ActiveRecord
     public function getPrzedmiots()
     {
         return $this->hasMany(Przedmiot::className(), ['id' => 'przedmiot_id'])->viaTable('przedmiotKek', ['kek_id' => 'id']);
+    }
+    public static function keksForSelect2($kid, $pid)
+    {
+    	$result = [
+    		'Wiedza' => [],
+    		'Umiejętności' => [],
+    		'Kompetencje społeczne' => []
+    	];
+    	foreach(Kek::findBySql('SELECT * FROM kek WHERE kierunekStudiow_id=' . $kid . ' AND id NOT IN (SELECT kek_id FROM przedmiotKek WHERE przedmiot_id=' . $pid . ')')->each() as $kek){
+    		$result[static::categoryName[$kek->kategoria]][$kek->id] = $kek->symbol . ': ' . $kek->opis; 
+    		Yii::trace('kategoria: ' . static::categoryName[$kek->kategoria]);
+    	}
+    	 Yii::trace($result);
+    	return $result;
     }
 }

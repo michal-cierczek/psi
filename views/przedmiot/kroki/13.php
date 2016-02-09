@@ -25,9 +25,10 @@ use yii\grid\GridView;
             	[
             			'ok' => function($url, $model, $key)
             			{
+            				Yii::trace($model);
             				$icon = '<span class="glyphicon glyphicon-ok"></span>';
             				$label = 'Wybierz';
-            				$url = Url::to(["create", 'step'=>'13a', 'kierunekId' => $model->id, 'kierunek'=>$model->opis, 'specjalnosc'=>$model->specjalnosc, 'cykl'=>$model->cykl]);
+            				$url = Url::to(["create", 'step'=>'13a', 'pid' => $model->id]);
             				return Html::a($icon, $url, ['title' => $label]);
             				
             				

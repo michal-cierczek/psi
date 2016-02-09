@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
         	'symbol',
-        	'kierunekStudiow_id', 
+        	//'kierunekStudiow_id', 
             'opis:ntext',
         	[
         			'class' => DataColumn::className(),

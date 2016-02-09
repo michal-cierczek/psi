@@ -27,7 +27,8 @@ $this->params['breadcrumbs'][] = 'Update';
 				['label' => 'Ocena osiągnięcia PEK', 'url' => Url::to(['update', 'id' => $id, 'step'=>'8'])],
 				['label' => 'Literatura', 'url' => Url::to(['update', 'id' => $id, 'step'=>'9'])],
 				['label' => 'Opiekun', 'url' => Url::to(['update', 'id' => $id, 'step'=>'10'])],
-				['label' => 'Macierz powiązania', 'url' => Url::to(['update', 'id' => $id, 'step'=>'11'])],
+// 				['label' => 'Macierz powiązania', 'url' => Url::to(['update', 'id' => $id, 'step'=>'11'])],
+				['label' => 'Powiązane KEK', 'url' => Url::to(['create', 'step'=>'14', 'pid' => $id])],
 		],
 ]); ?>
 </div>

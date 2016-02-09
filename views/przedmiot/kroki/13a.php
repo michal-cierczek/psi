@@ -3,17 +3,18 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use app\models\User;
+use app\models\Przedmiot;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Przedmiot */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
- <?= '<b>Cykl: </b>'. $cykl ?>
+ <?= '<b>Cykl: </b>'. $kierunek->cykl ?>
     
-    <?= '<br><b>Nazwa kierunku: </b>'. $kierunek ?>
+    <?= '<br><b>Nazwa kierunku: </b>'. $kierunek->opis ?>
     
-    <?= '<br><b>Nazwa Specjalności: </b>'. $specjalnosc ?>
+    <?= '<br><b>Nazwa Specjalności: </b>'. $kierunek->specjalnosc ?>
 
 <div class="przedmiot-form">
 
@@ -32,7 +33,7 @@ use app\models\User;
     <?= $form->field($model, 'grupaKursow')->checkbox() ?>
     
     
-    <?= $form->field($model, 'kierunekStudiow_id')->hiddenInput(['value' => $kierunekId])->label(false) ?>
+    <?= $form->field($model, 'kierunekStudiow_id')->hiddenInput(['value' => $kierunek->id])->label(false) ?>
     
     <?= $form->field($model, 'published')->hiddenInput(['value' => 0])->label(false) ?>
 

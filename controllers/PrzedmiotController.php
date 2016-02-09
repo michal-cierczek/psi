@@ -25,6 +25,9 @@ use app\models\KierunekSearch;
 use app\models\User;
 use app\models\OcenaOsiagnieciaPekpek;
 use app\models\KierunekStudiow;
+use app\models\Kek;
+use app\models\KekSearch;
+use app\models\PrzedmiotKek;
 
 /**
  * PrzedmiotController implements the CRUD actions for Przedmiot model.
@@ -82,6 +85,15 @@ public function behaviors()
     			'dataProvider' => $dataProvider,
     	]);
     }
+    public function actionOpublikuj($id)
+    {
+    	
+    	$model = Przedmiot::find() -> where(['id' => $id]) -> one();
+    	$model['published']='1';
+    	$model->save();
+    	return $this->redirect('index');
+    	
+    }
    
     /**
      * Displays a single Przedmiot model.
@@ -99,13 +111,15 @@ public function behaviors()
     $peki = Pek::find()->where(['przedmiot_id'=>$id])->AsArray()->all();
     $tresci = TresciProgramowe::find()->where(['przedmiot_id'=>$id])->AsArray()->all();
     $narzedzia = NarzedziaDydaktyczne::find()->where(['przedmiot_id'=>$id])->AsArray()->all();
+    $oceny = Ocena::find()->where(['przedmiot_id'=>$id])->all();
     
     $content = $this->renderPartial('viewPdf', ['id' => $id, 'kodKursu' => $kodKursu, 'wymaganie' => $wymaganie,
     		 'nazwaPolska' => $nazwaPolska, 'nazwaAngielska' => $nazwaAngielska, 'kierunekStudiow_id' => $kierunekStudiow_id,
     		'published' => $published, 'user_id' => $user_id, 'grupaKursow' => $grupaKursow, 'litPodstawowa' => $litPodstawowa,
     		'litUzupelniajaca' => $litUzupelniajaca, 'kierunekNazwa' => $kierunekNazwa, 'kierunekSpec' => $kierunekSpec,
     		'kierunekStopien' => $kierunekStopien, 'kursy' => $kursy, 'cele' => $cele, 'peki' => $peki, 'tresci' => $tresci,
-    		'narzedzia' => $narzedzia, 'userName' => $userName, 'userSurname' => $userSurname, 'userEmail' => $userEmail
+    		'narzedzia' => $narzedzia, 'userName' => $userName, 'userSurname' => $userSurname, 'userEmail' => $userEmail,
+    		'oceny' => $oceny,
     ]);
  
     // setup kartik\mpdf\Pdf component
@@ -142,7 +156,7 @@ public function behaviors()
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate($step, $kierunekId=null, $kierunek=null, $specjalnosc=null, $cykl=null)
+    public function actionCreate($step, $pid=null)
     {
         $forModal = null;
     	switch($step){
@@ -152,28 +166,34 @@ public function behaviors()
     				$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
     				break;
     		case '13a':
+    				$kierunek = KierunekStudiow::findOne($pid);
     				$model = new Przedmiot();
+    				if($model->load(Yii::$app->request->post()) && $model->save()) {
+  	 					$step='14';
+  	 					return $this->redirect(['create', 'step' => $step, 'pid'=>$model->id]);
+    				} else {
+    					return $this->render('create', ['step' => $step, 'model'=>$model, 'kierunek' =>$kierunek]);
+    				}
     				break;
     		case '14' :
-    				$model = new Pek();
-    				$searchModel = new PekSearch();
-    				$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-    				break;
+    				if(Yii::$app->request->isPost){
+    					foreach(Yii::$app->request->post()['KeksOdBabci'] as $kek){
+    						$model = new PrzedmiotKek();
+    						$model->przedmiot_id = $pid;
+    						$model->kek_id = $kek;
+    						$model->save();
+    					}
+    				}
+    				$searchModel = new KekSearch();
+    				$dataProvider = $searchModel->search(['przedmiotId' => $pid]);
+    				$model = new Kek();
+    				$przedmiot = Przedmiot::findOne($pid);
+    				return $this->render('create', ['model'=>$model, 'searchModel'=> $searchModel, 'dataProvider' => $dataProvider, 'step' => $step, 'przedmiot' => $przedmiot, 'forModal' => $forModal]);
     			
-    	}
-    	
-    	
-  	 	if ($step=='13a' && $model->load(Yii::$app->request->post()) && $model->save()) {
-  	 		$step='14';
-  	 		return $this->redirect(['create', 'step' => $step, 'model'=>$model, 'kierunekId' => $kierunekId, 'kierunek'=>$kierunek, 'specjalnosc'=>$specjalnosc, 'cykl'=>$cykl]);
-  	 		
+    	}	
   	 	
-  	 	}
-  	 	elseif($step=='13a'){
-  	 		return $this->render('create', ['step' => $step, 'model'=>$model, 'kierunekId' => $kierunekId, 'kierunek'=>$kierunek, 'specjalnosc'=>$specjalnosc, 'cykl'=>$cykl]);
-  	 	}
   	 	if ($model->load(Yii::$app->request->post()) && $model->save()){
-  	 		return $this->redirect(['create', 'model'=>$model, 'searchModel'=> $searchModel, 'dataProvider' => $dataProvider, 'step' => $step, 'forModal' => $forModal]);
+  	 		return $this->redirect(['create', 'model'=>$model]);
   	 		$step=$step++;
   	 	}
   	 	
@@ -252,11 +272,12 @@ public function behaviors()
     				$model = new Przedmiot();
     			break;
     	}
-    	//if(Yii::$app->user->identity->groupId !== 'admin' or $model->user_id != Yii::$app->user->identity->id){
-    		//Yii::trace(Yii::$app->user->identity->groupId);
-    		//Yii::trace(Yii::$app->user->identity->username);
-    		//echo $this->redirect('/user/login');}
-    	//else{
+    	if(Yii::$app->user->identity->groupId != 'admin' && $model->user_id != Yii::$app->user->identity->id){
+    		Yii::trace(Yii::$app->user->identity->groupId);
+    		Yii::trace(Yii::$app->user->identity->id);
+    		throw new \yii\base\ErrorException( "Nie masz odpowiednich uprawnień do edycji tej karty przedmiotu." );
+    		}
+    	else{
     	
 	    	if ($step != 2 && $step != 4 && $step != 5 && $step != 6 && $step != 7 && $step != 8 && $model->load(Yii::$app->request->post()) && $model->save()) {
 	    		if(step!=11)
@@ -300,7 +321,7 @@ public function behaviors()
 	    		}
 	    	}
 	    	return $this->render('update', ['model' => $model, 'id' => $id, 'step' => $step, 'forModal' => $forModal]);      
-   		 //}
+   		 }
     }
     /**
      * Deletes an existing Przedmiot model.
