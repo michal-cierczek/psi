@@ -134,4 +134,18 @@ class Kek extends \yii\db\ActiveRecord
     	 Yii::trace($result);
     	return $result;
     }
+    public static function keksForMS($kid, $pid)
+    {
+    	$result = [
+    			'Wiedza' => [],
+    			'Umiejętności' => [],
+    			'Kompetencje społeczne' => []
+    	];
+    	foreach(Kek::findBySql('SELECT * FROM kek WHERE kierunekStudiow_id=' . $kid . ' AND id NOT IN (SELECT kek_id FROM przedmiotKek WHERE przedmiot_id=' . $pid . ')')->each() as $kek){
+    		$result[static::categoryName[$kek->kategoria]][$kek->id] = $kek->symbol . ': ' . $kek->opis;
+    		Yii::trace('kategoria: ' . static::categoryName[$kek->kategoria]);
+    	}
+    	Yii::trace($result);
+    	return $result;
+    }
 }

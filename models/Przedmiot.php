@@ -46,11 +46,11 @@ class Przedmiot extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['kodKursu', 'nazwaPolska', 'nazwaAngielska', 'kierunekStudiow_id', 'published', 'user_id'], 'required'],
+            [['kodKursu', 'nazwaPolska', 'nazwaAngielska', 'kierunekStudiow_id', 'published', 'user_id'], 'required', 'message'=>'To pole jest wymagane'],
             [['kierunekStudiow_id', 'published', 'user_id'], 'integer'],
             [['kodKursu', 'wymaganie', 'litPodstawowa', 'litUzupelniajaca'], 'string'],
-            [['nazwaPolska', 'nazwaAngielska'], 'string', 'max' => 100],
-            [['kodKursu'], 'unique'],
+            [['nazwaPolska', 'nazwaAngielska'], 'string', 'max' => 100, 'message'=>'zbyt długa nazwa'],
+            [['kodKursu'], 'unique', 'message'=>'Przedmiot o takim kodzie już istnieje!'],
         	[['grupaKursow'], 'safe']
         ];
     }
@@ -62,7 +62,7 @@ class Przedmiot extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'kodKursu' => 'Kod Kursu',
+            'kodKursu' => 'Kod Przedmiotu',
             'wymaganie' => 'Wymagania wstępne w zakresie wiedzy, umiejętności i innych kompetencji',
             'nazwaPolska' => 'Nazwa Polska',
             'nazwaAngielska' => 'Nazwa Angielska',

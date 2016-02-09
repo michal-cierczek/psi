@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
 						'del' => function($url, $model, $key){
         						$icon = '<span class="glyphicon glyphicon-trash"></span>';
         						$label = 'Usun';
-        						$url = Url::to(["/kek/delete", 'id' =>$model->id, 'kid' => $model->kierunekStudiow_id]);
+        						$url = Url::to(["/przedmiot/deletekek", 'pid' =>$_GET['pid'], 'kid' => $model->id]);
 								return Yii::$app->user->identity->groupId=='admin'? Html::a($icon, $url, ['title' => $label]):'';
 								}
 						                		

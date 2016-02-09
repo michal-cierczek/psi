@@ -336,6 +336,14 @@ public function actionDelete($id)
         $this->findModel($id)->delete();
         return $this->redirect(['index']);
     }
+    
+    public function actionDeletekek($pid, $kid)
+    {
+    		PrzedmiotKek::deleteAll(['przedmiot_id' => $pid, 'kek_id'=>$kid]);
+    		return $this->redirect(['create', 'step'=>14, 'pid'=>$pid]);
+    	
+    	
+    }
     /**
      * Finds the Przedmiot model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
