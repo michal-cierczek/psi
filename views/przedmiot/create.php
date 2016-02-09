@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = 'Create';
     	]); 
 	}else{
 		echo $this->render('kroki/' . $step, [
-    	'model'=> $model, 'kierunek'
+    	'model'=> $model, 'kierunek' => $kierunek
     	]);
 	}	
 ?>

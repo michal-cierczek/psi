@@ -13,6 +13,7 @@ use Yii;
  * @property integer $stopien
  * @property string $skrot
  * @property string $specjalnosc
+ * @property string $forma
  *
  * @property Kek[] $keks
  * @property Cykl $cykl
@@ -39,7 +40,8 @@ class KierunekStudiow extends \yii\db\ActiveRecord
             [['cykl_id', 'stopien'], 'integer'],
             [['opis'], 'string', 'max' => 255],
             [['skrot'], 'string', 'max' => 10],
-        		[['specjalnosc'], 'string']
+        		[['specjalnosc'], 'string'],
+        		[['forma'], 'safe']
         ];
     }
 
@@ -54,7 +56,8 @@ class KierunekStudiow extends \yii\db\ActiveRecord
             'cykl_id' => 'Cykl ID',
             'stopien' => 'Stopien',
             'skrot' => 'Skrot',
-        	'specjalnosc' => 'Specjalność'
+        	'specjalnosc' => 'Specjalność',
+        	'forma' => 'Forma studiów'
         ];
     }
 

@@ -15,6 +15,10 @@ use app\models\Przedmiot;
     <?= '<br><b>Nazwa kierunku: </b>'. $kierunek->opis ?>
     
     <?= '<br><b>Nazwa Specjalności: </b>'. $kierunek->specjalnosc ?>
+    
+    <?= '<br><b>Forma studiów: </b>'. $kierunek->forma ?>
+    
+    <?= '<br><b>Stopień studiów: </b>'. $kierunek->stopien == 1 ? 'I' : 'II' ?>
 
 <div class="przedmiot-form">
 
@@ -28,9 +32,12 @@ use app\models\Przedmiot;
 
     <?= $form->field($model, 'nazwaAngielska')->textInput() ?>
     
-    <?= $form->field($model, 'user_id')->dropDownList(User::usersForSelect())?>
+    <?= $form->field($model, 'rodzaj')->dropDownList(['obowiązkowy', 'wybieralny', 'ogólnouczelniany']) ?>
+    
+    <?= $form->field($model, 'user_id')->dropDownList(User::usersForSelect())->label('Opiekun przedmiotu')?>
     
     <?= $form->field($model, 'grupaKursow')->checkbox() ?>
+    
     
     
     <?= $form->field($model, 'kierunekStudiow_id')->hiddenInput(['value' => $kierunek->id])->label(false) ?>

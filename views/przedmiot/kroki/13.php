@@ -17,6 +17,7 @@ use yii\grid\GridView;
             'stopien',
             'skrot',
         	'specjalnosc',
+        	'forma',
         	'cykl',
             ['class' => 'yii\grid\ActionColumn',
             	'controller' => 'kierunek',

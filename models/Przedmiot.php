@@ -18,6 +18,7 @@ use Yii;
  * @property integer $user_id
  * @property string $litPodstawowa
  * @property string $litUzupelniajaca
+ * @property string $rodzaj
  *
  * @property CelKP[] $celKPs
  * @property Kurs[] $kurs
@@ -46,7 +47,7 @@ class Przedmiot extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['kodKursu', 'nazwaPolska', 'nazwaAngielska', 'kierunekStudiow_id', 'published', 'user_id'], 'required', 'message'=>'To pole jest wymagane'],
+            [['kodKursu', 'nazwaPolska', 'nazwaAngielska', 'kierunekStudiow_id', 'published', 'user_id', 'rodzaj'], 'required', 'message'=>'To pole jest wymagane'],
             [['kierunekStudiow_id', 'published', 'user_id'], 'integer'],
             [['kodKursu', 'wymaganie', 'litPodstawowa', 'litUzupelniajaca'], 'string'],
             [['nazwaPolska', 'nazwaAngielska'], 'string', 'max' => 100, 'message'=>'zbyt długa nazwa'],
@@ -71,7 +72,8 @@ class Przedmiot extends \yii\db\ActiveRecord
             'user_id' => 'User ID',
         	'grupaKursow' => 'Grupa kursów',
         	'litPodstawowa' => 'Literatura podstawowa',
-        	'litUzupelniajaca' => 'Literatura uzupełniająca'
+        	'litUzupelniajaca' => 'Literatura uzupełniająca',
+        	'rodzaj' => 'Rodzaj przedmiotu'
         ];
     }
 
@@ -131,6 +133,19 @@ class Przedmiot extends \yii\db\ActiveRecord
     public function getNazwaSpec(){
     	return $this->kierunekStudiow ?  $this->kierunekStudiow->specjalnosc : null;    
     }
+    
+    public function getForma(){
+    	return $this->kierunekStudiow ?  $this->kierunekStudiow->forma : null;
+    }
+    
+    public function getCykl(){
+    	return $this->kierunekStudiow ?  $this->kierunekStudiow->cykl : null;
+    }
+    
+    public function getStopien(){
+    	return $this->kierunekStudiow ?  $this->kierunekStudiow->stopien : null;
+    }
+    
     public function getAutorName()
     {
     	return $this->user->name;

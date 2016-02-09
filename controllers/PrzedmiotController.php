@@ -104,7 +104,7 @@ public function behaviors()
      */
     public function actionView($id, $kodKursu, $wymaganie, $nazwaPolska, $nazwaAngielska, $kierunekStudiow_id,
     		$published, $user_id, $grupaKursow, $litPodstawowa, $litUzupelniajaca, $kierunekNazwa, $kierunekSpec, 
-    		$kierunekStopien, $userName, $userSurname, $userEmail)
+    		$kierunekStopien, $userName, $userSurname, $userEmail, $forma, $rodzaj)
     {
     $kursy = Kurs::find()->where(['przedmiot_id'=>$id])->AsArray()->all();
     $cele = CelKP::find()->where(['przedmiot_id'=>$id])->AsArray()->all();
@@ -119,7 +119,7 @@ public function behaviors()
     		'litUzupelniajaca' => $litUzupelniajaca, 'kierunekNazwa' => $kierunekNazwa, 'kierunekSpec' => $kierunekSpec,
     		'kierunekStopien' => $kierunekStopien, 'kursy' => $kursy, 'cele' => $cele, 'peki' => $peki, 'tresci' => $tresci,
     		'narzedzia' => $narzedzia, 'userName' => $userName, 'userSurname' => $userSurname, 'userEmail' => $userEmail,
-    		'oceny' => $oceny,
+    		'oceny' => $oceny, 'forma'=>$forma, 'rodzaj'=>$rodzaj
     ]);
  
     // setup kartik\mpdf\Pdf component

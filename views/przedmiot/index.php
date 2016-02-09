@@ -33,6 +33,12 @@ $this->params['breadcrumbs'][] = $this->title;
         		'value' => 'kierunekStudiow.opis',
         		'label' => 'Nazwa kierunku'
         	],
+        	[ // specjalnosc
+        		'attribute' => 'kierunekStudiow_id',
+        		'value' => 'kierunekStudiow.specjalnosc',
+        		'label' => 'Specjalność'
+        	],
+        
         	[ // cykl
         		'attribute' => 'kierunekStudiow_id',
         		'value' => 'kierunekStudiow.cykl',
@@ -82,7 +88,11 @@ $this->params['breadcrumbs'][] = $this->title;
 									'userEmail' => $model -> user -> email,
 									'grupaKursow' => $model -> grupaKursow,
 									'litPodstawowa' => $model -> litPodstawowa,
-									'litUzupelniajaca' => $model -> litUzupelniajaca
+									'litUzupelniajaca' => $model -> litUzupelniajaca,
+									'forma' => $model -> kierunekStudiow -> forma,
+									'rodzaj' => $model -> rodzaj
+									
+									
 							]);
 							return Html::a($icon, $url, ['title' => $label]);
 						},

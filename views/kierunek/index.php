@@ -28,6 +28,8 @@ $this->params['breadcrumbs'][] = $this->title;
         	],
             'stopien',
             'skrot',
+        	'forma',
+        	'stopien',
         	'cykl',
             ['class' => 'yii\grid\ActionColumn',
             	'controller' => 'kierunek',
