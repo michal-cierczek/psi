@@ -158,4 +158,11 @@ class Przedmiot extends \yii\db\ActiveRecord
     {
     	return $this->user->email;
     }
+    public static function idAutora($id)
+    {
+    	
+    	$result= Przedmiot::findOne(['id'=>$id])->user_id;
+    	
+    	return $result;
+    }
 }

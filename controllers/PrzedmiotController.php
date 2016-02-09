@@ -272,7 +272,7 @@ public function behaviors()
     				$model = new Przedmiot();
     			break;
     	}
-    	if(Yii::$app->user->identity->groupId != 'admin' && $model->user_id != Yii::$app->user->identity->id){
+    	if(Yii::$app->user->identity->groupId != 'admin' && Przedmiot::idAutora($id) != Yii::$app->user->identity->id){
     		Yii::trace(Yii::$app->user->identity->groupId);
     		Yii::trace(Yii::$app->user->identity->id);
     		throw new \yii\base\ErrorException( "Nie masz odpowiednich uprawnień do edycji tej karty przedmiotu." );
