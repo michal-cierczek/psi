@@ -44,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
         	}
         			],
             ['class' => 'yii\grid\ActionColumn',
-            		'template'=>'{view} {update} {delete}',
+            		'template'=>'{view} {update} {delete} {publish}',
             		'buttons'=>
             		[
             			'update' => function($url, $model, $key)
@@ -85,8 +85,16 @@ $this->params['breadcrumbs'][] = $this->title;
 									'litUzupelniajaca' => $model -> litUzupelniajaca
 							]);
 							return Html::a($icon, $url, ['title' => $label]);
+						},
+						'publish' => function($url, $model, $key)
+						{
+							$icon = '<span class="glyphicon glyphicon-ok"></span>';
+							$label = 'Opublikuj';
+							$url = Url::to(["opublikuj", 'id' =>$model -> id]);
+							return !(Yii::$app->user->isGuest) ?  Html::a($icon, $url, ['title' => $label]):'';
 						}
     				]
+    				
     		],
         ],
     ]); ?>
