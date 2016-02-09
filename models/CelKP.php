@@ -30,7 +30,9 @@ class CelKP extends \yii\db\ActiveRecord
     {
         return [
             [['opis'], 'string'],
-            [['przedmiot_id'], 'required'],
+            [['przedmiot_id'], 'required',
+            		'message' => 'To pole nie może być puste.'
+            ],
             [['przedmiot_id'], 'integer']
         ];
     }

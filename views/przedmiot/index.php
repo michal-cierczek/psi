@@ -2,6 +2,8 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\GridView;
+use yii\grid\CheckboxColumn;
+use app\models\Przedmiot;
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\PrzedmiotSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -15,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	
 	
     <p>
-        <?= Html::a('Create Przedmiot', ['create', 'step'=>'13'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Stwórz Przedmiot', ['create', 'step'=>'13'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -36,8 +38,13 @@ $this->params['breadcrumbs'][] = $this->title;
         		'value' => 'kierunekStudiow.cykl',
         		'label' => 'Cykl'
         	],
+        	['attribute' => 'published',
+        			'value' => function($model){
+        			return Przedmiot::opublikowany[$model->published];
+        	}
+        			],
             ['class' => 'yii\grid\ActionColumn',
-            		'template'=>'{view} {update} {delete}',
+            		'template'=>'{view} {update} {delete} {publish}',
             		'buttons'=>
             		[
             			'update' => function($url, $model, $key)
@@ -78,8 +85,16 @@ $this->params['breadcrumbs'][] = $this->title;
 									'litUzupelniajaca' => $model -> litUzupelniajaca
 							]);
 							return Html::a($icon, $url, ['title' => $label]);
+						},
+						'publish' => function($url, $model, $key)
+						{
+							$icon = '<span class="glyphicon glyphicon-ok"></span>';
+							$label = 'Opublikuj';
+							$url = Url::to(["opublikuj", 'id' =>$model -> id]);
+							return !(Yii::$app->user->isGuest) ?  Html::a($icon, $url, ['title' => $label]):'';
 						}
     				]
+    				
     		],
         ],
     ]); ?>

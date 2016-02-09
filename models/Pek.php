@@ -39,10 +39,17 @@ class Pek extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['symbol', 'opis', 'kategoria', 'przedmiot_id'], 'required'],
+            [['symbol', 'opis', 'kategoria', 'przedmiot_id'], 'required',
+            		'message' => 'To pole nie może być puste.'
+            ],
             [['symbol', 'kategoria'], 'string', 'max' => 45],
             [['opis'], 'string'],
         	[['przedmiot_id'], 'integer'],
+        	[
+        		['symbol'],
+        		'match', 'pattern'=>'/^PEK_[A-Z]{1}[0-9]{2}$/',
+        		'message'=>'Niepoprawna forma. Symbol musi zaczynać się od ciągu znaków "PEK_" następującej po nim dużej litery oraz dwóch cyfr.'
+        	],
         ];
     }
 

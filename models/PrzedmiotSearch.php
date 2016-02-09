@@ -41,7 +41,14 @@ class PrzedmiotSearch extends Przedmiot
      */
     public function search($params)
     {
-        $query = Przedmiot::find();
+    	if(Yii::$app->user->isGuest){
+    		$query = Przedmiot::find()->where(['published'=>1]);}
+    	elseif(Yii::$app->user->identity->groupId=='admin'){
+       		$query = Przedmiot::find();}
+        elseif(Yii::$app->user->identity->groupId=='author'){
+        	$query = Przedmiot::find()->where(['user_id'=>Yii::$app->user->identity->id]);}
+        
+        
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

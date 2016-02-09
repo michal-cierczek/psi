@@ -293,7 +293,27 @@ foreach($narzedzia as $narzedzie){
 $html = $html . '</div><br/>';
 
 //=========== OCENA OSIĄGNIĘCIA PRZEDMIOTOWYCH EFEKTÓW KSZTAŁCENIA
+$html = $html . '<div class="borders"><p class="centers">OCENA OSIĄGNIĘCIA PRZEDMIOTOWYCH EFEKTÓW KSZTAŁCENIA</p>';
+		$html = $html . '<table>
+						<tr>
+						<td>Oceny :F – formująca (w trakcie semestru), P – podsumowująca (na koniec semestru)</td>
+						<td>Numery efektu kształcenia</td>
+						<td> Sposób oceny osiągnięcia efektu kształcenia</td>
+						</tr>';
+		$textPrinted = true;
+		
+		foreach($oceny as $ocena){
+				$html = $html . '<tr>
+						<td>' . $ocena['symbol'] . '</td> <td>';
+						foreach($ocena->getPeks()->each() as $pek)
+								$html = $html  . $pek['symbol'] . ', ';
+						$html = $html . '</td>
 
+						<td style="text-align:center">' . $ocena['opis'] . '</td>
+					</tr>';
+		}
+		$html = $html . '</table>';
+		$html = $html . '</div><br/>';
 //=========== LITERAURA PODSTAWOWA I UZUPEŁNIAJĄCA ==============
 $html = $html . '<div class="borders"><p class="centers">LITERATURA PODSTAWOWA I UZUPEŁNIAJĄCA</p>
 				<b><u>LITERATURA PODSTAWOWA</u></b><br/>' .

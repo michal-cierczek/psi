@@ -22,6 +22,7 @@ use Yii;
  */
 class Kurs extends \yii\db\ActiveRecord
 {
+	
 	const formaZaliczeniaNames = [
 			'0' => 'Zaliczenie',
 			'1' => 'Egzamin',
@@ -51,11 +52,24 @@ class Kurs extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['formaProwadzeniaZajec', 'CMPS', 'ZZU', 'formaZaliczenia', 'bKECTS', 'pECTS', 'ECTS', 'czyKonczacy', 'przedmiot_id'], 'required'],
-            [['CMPS', 'ZZU', 'bKECTS', 'pECTS', 'ECTS', 'przedmiot_id'], 'integer'],
+            [['formaProwadzeniaZajec', 'CMPS', 'ZZU', 'formaZaliczenia', 'bKECTS', 'pECTS', 'ECTS', 'czyKonczacy', 'przedmiot_id'], 'required',
+            		'message' => 'To pole nie może być puste.'
+            ],
+            [['CMPS', 'ZZU', 'bKECTS', 'pECTS', 'ECTS', 'przedmiot_id'], 'integer',
+            		'message' => 'Wymagana liczba.'
+            ],
             [['formaProwadzeniaZajec'], 'string', 'max' => 45],
             [['formaZaliczenia'], 'string'],
         	[['czyKonczacy'], 'boolean'],
+        	[['ECTS','bKECTS','pECTS'], 'compare', 'compareValue' => 6, 'operator' => '<=',
+        			'message' => 'Wartość nie powinna być większa niż 6 pkt ECTS.'
+        	],
+        	[['ZZU','bKECTS','pECTS'], 'compare', 'compareValue' => 100, 'operator' => '<=',
+        		'message' => 'Wartość nie powinna być większa niż 120.'
+        	],
+        	['ECTS', 'compare', 'compareValue' => 1, 'operator' => '>=',
+        	'message' => 'Wartość nie powinna być mniejsza niż 1 pkt ECTS.'
+        	],
         	[['przedmiot_id'], 'safe']
         ];
     }
