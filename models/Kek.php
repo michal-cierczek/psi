@@ -46,7 +46,7 @@ class Kek extends \yii\db\ActiveRecord
             'message' => 'To pole nie może być puste.'
             ],
             ['kategoria', 'integer'],
-            [['opis'], 'string', 'max' => 255,
+            [['opis'], 'string',
             'message' => 'Zbyt długi ciąg znaków.'
             ],
         	[['kierunekStudiow_id'], 'safe']
