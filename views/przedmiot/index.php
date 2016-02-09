@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	
 	
     <p>
-        <?= Yii::$app->user->isGuest ? '' : Html::a('Stwórz Przedmiot', ['create', 'step'=>'13'], ['class' => 'btn btn-success']) ?>
+        <?= Yii::$app->user->isGuest ? '' :  (Yii::$app->user->identity->groupId!='admin' ? '': Html::a('Stwórz Przedmiot', ['create', 'step'=>'13'], ['class' => 'btn btn-success'])) ?>
     </p>
 
     <?= GridView::widget([
