@@ -27,6 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
         		'label' => 'Nazwa'
         	],
             'skrot',
+        	'specjalnosc',
         	'forma',
         	'stopien',
         	'cykl',
