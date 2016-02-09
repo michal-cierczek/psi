@@ -21,7 +21,7 @@ $html = $css . '<div class="borders">Wydział: <b>Informatyki i zarządzania</b>
 		Specjalność (jeśli dotyczy): <b>' . $kierunekSpec . '</b><br/>
 		Stopień studiów: <b>' . ($kierunekStopien == 1 ? 'I' : 'II') . '</b><br/>
 		Forma studiów: <b>' . $forma . '</b><br>
-		Rodzaj przedmiotu: <b>' . $rodzaj . '</b><br>
+		Rodzaj przedmiotu: <b>obowiązkowy / <s>wybieralny</s> / <s>ogólnouczelniany</s></b><br>
 		Kod przedmiotu: <b>' . $kodKursu . '</b><br/>
 		Grupa kursów: <b>' . ($grupaKursow == 1 ? 'TAK / <s>NIE</s>' : '<s>TAK</s> / NIE') . '<b></div><br/><br/>';
 
