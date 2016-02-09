@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 
-        <?= $form->field($model, 'username')?>
+        <?= $form->field($model, 'username', ['enableAjaxValidation' => true])->textInput()?>
 
         <?= $form->field($model, 'password')->passwordInput() ?>
 
